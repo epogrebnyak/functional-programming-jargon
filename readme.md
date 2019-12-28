@@ -1,8 +1,8 @@
 # Словарь сленга функционального программирования
 
-> This is a Russian translation of [Functional Programming Jargon][en] with Haskell examples from [Turkish version][tr].
+> This is a Russian translation of [Functional Programming Jargon][en] with a few Haskell examples from [Turkish version][tr].
 
-> Эта статья - русский перевод публикации [Functional Programming Jargon][en] с примерами на Нaskell из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript. 
+> Эта статья - перевод и переработка публикации [Functional Programming Jargon][en], включая примеры на Нaskell из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript. 
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
@@ -14,35 +14,57 @@ Where applicable, this document uses terms defined in the [Fantasy Land spec](ht
 __Table of Contents__
 <!-- RM(noparent,notop) -->
 
-* [Arity](#arity)
-* [Higher-Order Functions (HOF)](#higher-order-functions-hof)
-* [Closure](#closure)
-* [Partial Application](#partial-application)
-* [Currying](#currying)
-* [Auto Currying](#auto-currying)
-* [Function Composition](#function-composition)
-* [Continuation](#continuation)
-* [Purity](#purity)
-* [Side effects](#side-effects)
-* [Idempotent](#idempotent)
-* [Point-Free Style](#point-free-style)
-* [Predicate](#predicate)
-* [Contracts](#contracts)
+
+Общие понятия
+
+* [Referential Transparency](#referential-transparency)
+* [Equational Reasoning](#equational-reasoning)
 * [Category](#category)
 * [Value](#value)
 * [Constant](#constant)
-* [Functor](#functor)
-* [Pointed Functor](#pointed-functor)
-* [Lift](#lift)
-* [Referential Transparency](#referential-transparency)
-* [Equational Reasoning](#equational-reasoning)
+* [Purity](#purity)
+* [Side effects](#side-effects)
+* [Continuation](#continuation)
+* [Idempotent](#idempotent)
+* [Predicate](#predicate)
+* [Contracts](#contracts)
+
+Функции 
+
+* [Function](#function)
+* [Higher-Order Functions (HOF)](#higher-order-functions-hof)
+* [Closure](#closure)
+* [Partial Application](#partial-application)
+* [Partial function](#partial-function)
+* [Currying](#currying)
+* [Auto Currying](#auto-currying)
+* [Function Composition](#function-composition)
 * [Lambda](#lambda)
 * [Lambda Calculus](#lambda-calculus)
 * [Lazy evaluation](#lazy-evaluation)
+* [Point-Free Style](#point-free-style)
+* [Type Signatures](#type-signatures)
+
+Типы
+
+* [Algebraic data type](#algebraic-data-type)
+  * [Sum type](#sum-type)
+  * [Product type](#product-type)
+* [Arity](#arity)
+* [Functor](#functor)
+* [Pointed Functor](#pointed-functor)
+* [Lift](#lift)
 * [Monoid](#monoid)
 * [Monad](#monad)
 * [Comonad](#comonad)
 * [Applicative Functor](#applicative-functor)
+* [Setoid](#setoid)
+* [Semigroup](#semigroup)
+* [Foldable](#foldable)
+* [Lens](#lens)
+
+Морфизмы
+
 * [Morphism](#morphism)
   * [Endomorphism](#endomorphism)
   * [Isomorphism](#isomorphism)
@@ -52,18 +74,6 @@ __Table of Contents__
   * [Hylomorphism](#hylomorphism)
   * [Paramorphism](#paramorphism)
   * [Apomorphism](#apomorphism)
-* [Setoid](#setoid)
-* [Semigroup](#semigroup)
-* [Foldable](#foldable)
-* [Lens](#lens)
-* [Type Signatures](#type-signatures)
-* [Algebraic data type](#algebraic-data-type)
-  * [Sum type](#sum-type)
-  * [Product type](#product-type)
-* [Option](#option)
-* [Function](#function)
-* [Partial function](#partial-function)
-* [Functional Programming Libraries in JavaScript](#functional-programming-libraries-in-javascript)
 
 
 <!-- /RM -->
