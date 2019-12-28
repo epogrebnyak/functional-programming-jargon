@@ -900,35 +900,39 @@ __Further reading__
 * [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
 
 ## Algebraic data type
-A composite type made from putting other types together. Two common classes of algebraic types are [sum](#sum-type) and [product](#product-type).
 
-### Sum type
-A Sum type is the combination of two types together into another one. It is called sum because the number of possible values in the result type is the sum of the input types.
+Составной тип, который получается путем из соединения нескольких других типов. Соединение типов называется *алгеброй*, что повлияло на термин. Чаще всего рассматриваются тип-сумма и тип-произведение.
 
-JavaScript doesn't have types like this but we can use `Set`s to pretend:
-```js
-// imagine that rather than sets here we have types that can only have these values
-const bools = new Set([true, false])
-const halfTrue = new Set(['half-true'])
+[sum](#sum-type) and [product](#product-type).
 
-// The weakLogic type contains the sum of the values from bools and halfTrue
-const weakLogicValues = new Set([...bools, ...halfTrue])
+### Тип-сумма (sum type)
+
+Тип-сумма - это комбинация двух и более типов в новый тип, таким образом что число возможных значений в новом типе будет соответствовать сумме входящих элементов.
+
+Булевский тип данных "правда-ложь" является самым простым типом-суммой:
+
+```haskell
+data Bool = False | True
 ```
 
-Sum types are sometimes called union types, discriminated unions, or tagged unions.
+Три цвета светофора также тип сумма:
 
-There's a [couple](https://github.com/paldepind/union-type) [libraries](https://github.com/puffnfresh/daggy) in JS which help with defining and using union types.
+```haskell
+data TrafficLight = Red | Yellow | Green
+```
 
-Flow includes [union types](https://flow.org/en/docs/types/unions/) and TypeScript has [Enums](https://www.typescriptlang.org/docs/handbook/enums.html) to serve the same role.
+В примерах выше тип-сумма построен из простейших элементов, но эти элементы могут быть и более сложными.
 
-### Product type
+```haskell
+data Move = Stop | Ahead Int | Back Int
+```
+
+### Тип-произведение (product type)
+
+**Тип-произведение** <...>
 
 A **product** type combines types together in a way you're probably more familiar with:
 
-```js
-// point :: (Number, Number) -> {x: Number, y: Number}
-const point = (x, y) => ({ x, y })
-```
 It's called a product because the total possible values of the data structure is the product of the different values. Many languages have a tuple type which is the simplest formulation of a product type.
 
 See also [Set theory](https://en.wikipedia.org/wiki/Set_theory).
@@ -992,7 +996,8 @@ const times2 = n => n * 2
 [1, 2, 3].map(times2) // [2, 4, 6]
 ```
 
-## Partial function
+## Функция
+
 A partial function is a [function](#function) which is not defined for all arguments - it might return an unexpected result or may never terminate. Partial functions add cognitive overhead, they are harder to reason about and can lead to runtime errors. Some examples:
 ```js
 // example 1: sum of the list
@@ -1058,24 +1063,6 @@ times(-1)(console.log)
 ```
 Making your partial functions total ones, these kinds of runtime errors can be prevented. Always returning a value will also make for code that is both easier to maintain as well as to reason about.
 
-## Functional Programming Libraries in JavaScript
-
-* [mori](https://github.com/swannodette/mori)
-* [Immutable](https://github.com/facebook/immutable-js/)
-* [Immer](https://github.com/mweststrate/immer)
-* [Ramda](https://github.com/ramda/ramda)
-* [ramda-adjunct](https://github.com/char0n/ramda-adjunct)
-* [Folktale](http://folktale.origamitower.com/)
-* [monet.js](https://cwmyers.github.io/monet.js/)
-* [lodash](https://github.com/lodash/lodash)
-* [Underscore.js](https://github.com/jashkenas/underscore)
-* [Lazy.js](https://github.com/dtao/lazy.js)
-* [maryamyriameliamurphies.js](https://github.com/sjsyrek/maryamyriameliamurphies.js)
-* [Haskell in ES6](https://github.com/casualjavascript/haskell-in-es6)
-* [Sanctuary](https://github.com/sanctuary-js/sanctuary)
-* [Crocks](https://github.com/evilsoft/crocks)
-* [Fluture](https://github.com/fluture-js/Fluture)
-* [fp-ts](https://github.com/gcanti/fp-ts)
 
 ---
 
