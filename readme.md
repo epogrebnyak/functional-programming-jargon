@@ -1,9 +1,11 @@
 # Словарь сленга функционального программирования
 
-This is a Russian translation of Functional Programming Jargon with Haskell examples from Turkish version.
+This is a Russian translation of [Functional Programming Jargon][en] with Haskell examples from [Turkish version][tr].
 
-Эта статья - русский перевод публикации Functional Programming Jargon с примерами на Нaskell из турецкой версии перевода. Оригинальная статья использует примеры на JavaScript. 
+Эта статья - русский перевод публикации [Functional Programming Jargon][en] с примерами на Нaskell из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript. 
 
+[en]: https://github.com/hemanth/functional-programming-jargon
+[tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
@@ -83,7 +85,7 @@ console.log(arity) // 2
 
 Higher-Order Function (HOF)
 
-Функция, которая принимает другую функцию как аргумент и/или возвращает функцию.
+Функция, которая принимает другую функцию как аргумент и/или возвращает функцию как результат.
 
 ```haskell
 Prelude> let add3 a = a + 3
