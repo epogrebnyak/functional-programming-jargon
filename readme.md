@@ -1,8 +1,8 @@
 # Словарь сленга функционального программирования
 
-This is a Russian translation of [Functional Programming Jargon][en] with Haskell examples from [Turkish version][tr].
+> This is a Russian translation of [Functional Programming Jargon][en] with Haskell examples from [Turkish version][tr].
 
-Эта статья - русский перевод публикации [Functional Programming Jargon][en] с примерами на Нaskell из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript. 
+> Эта статья - русский перевод публикации [Functional Programming Jargon][en] с примерами на Нaskell из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript. 
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
