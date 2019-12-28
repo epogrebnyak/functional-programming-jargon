@@ -899,15 +899,13 @@ __Further reading__
 * [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch7.html#whats-your-type)
 * [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
 
-## Algebraic data type
+## Алгебраический тип данных
 
-Составной тип, который получается путем из соединения нескольких других типов. Соединение типов называется *алгеброй*, что повлияло на термин. Чаще всего рассматриваются тип-сумма и тип-произведение.
-
-[sum](#sum-type) and [product](#product-type).
+Составной тип, который получается путем из соединения нескольких других типов. Соединение типов называется *алгеброй*, что повлияло на название термина. Чаще всего рассматриваются тип-сумма и тип-произведение.
 
 ### Тип-сумма (sum type)
 
-Тип-сумма - это комбинация двух и более типов в новый тип, таким образом что число возможных значений в новом типе будет соответствовать сумме входящих элементов.
+Тип-сумма - это комбинация двух и более типов в новый тип таким образом, что число возможных значений в новом типе будет соответствовать сумме входящих элементов.
 
 Булевский тип данных "правда-ложь" является самым простым типом-суммой:
 
@@ -915,76 +913,43 @@ __Further reading__
 data Bool = False | True
 ```
 
-Три цвета светофора также тип сумма:
+Три цвета светофора также тип-сумма:
 
 ```haskell
 data TrafficLight = Red | Yellow | Green
 ```
 
 В примерах выше тип-сумма построен из простейших элементов, но эти элементы могут быть и более сложными.
+Тип `Move` описывает движение робота по прямой с целочисленными шагами вперед, назад или с остановкой. 
 
 ```haskell
 data Move = Stop | Ahead Int | Back Int
 ```
 
+Шаги робота теперь можно описать с помощью списка типа `[Move]`, например `[Ahead 1, Stop, Stop, Back -2]`.
+
+Типы `Maybe` и `Either`, широко использующиеся в языке Хаскелл, также являются типами-суммой.
+
 ### Тип-произведение (product type)
 
-**Тип-произведение** <...>
+Тип-произведение объединяет элементы таким образом, что количество новых значений представляет собой произведение возможных количеств входящих значений. В большинстве языков программирования есть тип кортеж (tuple), который является самым простым типом-произведением. 
 
-A **product** type combines types together in a way you're probably more familiar with:
+Привычные структры данных, например, записи с полями значений, также являются типами-произведением.
 
-It's called a product because the total possible values of the data structure is the product of the different values. Many languages have a tuple type which is the simplest formulation of a product type.
-
-See also [Set theory](https://en.wikipedia.org/wiki/Set_theory).
-
-## Option
-Option is a [sum type](#sum-type) with two cases often called `Some` and `None`.
-
-Option is useful for composing functions that might not return a value.
-
-```js
-// Naive definition
-
-const Some = (v) => ({
-  val: v,
-  map (f) {
-    return Some(f(this.val))
-  },
-  chain (f) {
-    return f(this.val)
-  }
-})
-
-const None = () => ({
-  map (f) {
-    return this
-  },
-  chain (f) {
-    return this
-  }
-})
-
-// maybeProp :: (String, {a}) -> Option a
-const maybeProp = (key, obj) => typeof obj[key] === 'undefined' ? None() : Some(obj[key])
-```
-Use `chain` to sequence functions that return `Option`s
-```js
-
-// getItem :: Cart -> Option CartItem
-const getItem = (cart) => maybeProp('item', cart)
-
-// getPrice :: Item -> Option Number
-const getPrice = (item) => maybeProp('price', item)
-
-// getNestedPrice :: cart -> Option a
-const getNestedPrice = (cart) => getItem(cart).chain(getPrice)
-
-getNestedPrice({}) // None()
-getNestedPrice({item: {foo: 1}}) // None()
-getNestedPrice({item: {price: 9.99}}) // Some(9.99)
+```haskell
+data Person = Person {name:String , age::Int}
+Person "LittleBaby" 2
 ```
 
-`Option` is also known as `Maybe`. `Some` is sometimes called `Just`. `None` is sometimes called `Nothing`.
+Место точки на плоскости соcтоит их двух координат, которые можно выразить типом-произведением двух значений типа `Float`:
+
+```haskell
+data Position = Position Float Float
+Position 1.5 2.8
+```
+
+<!-- См. также информацию [по теории множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
+-->
 
 ## Function
 A **function** `f :: A => B` is an expression - often called arrow or lambda expression - with **exactly one (immutable)** parameter of type `A` and **exactly one** return value of type `B`. That value depends entirely on the argument, making functions context-independant, or [referentially transparent](#referential-transparency). What is implied here is that a function must not produce any hidden [side effects](#side-effects) - a function is always [pure](#purity), by definition. These properties make functions pleasant to work with: they are entirely deterministic and therefore predictable. Functions enable working with code as data, abstracting over behaviour:
