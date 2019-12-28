@@ -1,21 +1,13 @@
-# Functional Programming Jargon
+# Словарь сленга функционального программирования
+
+This is a Russian translation of Functional Programming Jargon with Haskell examples from Turkish version.
+
+Эта статья - русский перевод публикации Functional Programming Jargon с примерами на Нaskell из турецкой версии перевода. Оригинальная статья использует примеры на JavaScript. 
+
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
-Examples are presented in JavaScript (ES2015). [Why JavaScript?](https://github.com/hemanth/functional-programming-jargon/wiki/Why-JavaScript%3F)
-
 Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
-
-__Translations__
-* [Portuguese](https://github.com/alexmoreno/jargoes-programacao-funcional)
-* [Spanish](https://github.com/idcmardelplata/functional-programming-jargon/tree/master)
-* [Chinese](https://github.com/shfshanyue/fp-jargon-zh)
-* [Bahasa Indonesia](https://github.com/wisn/jargon-pemrograman-fungsional)
-* [Python World](https://github.com/jmesyou/functional-programming-jargon.py)
-* [Scala World](https://github.com/ikhoon/functional-programming-jargon.scala)
-* [Rust World](https://github.com/JasonShin/functional-programming-jargon.rs)
-* [Korean](https://github.com/sphilee/functional-programming-jargon)
-* [Haskell Turkish](https://github.com/mrtkp9993/functional-programming-jargon)
 
 __Table of Contents__
 <!-- RM(noparent,notop) -->
@@ -87,20 +79,21 @@ console.log(arity) // 2
 // The arity of sum is 2
 ```
 
-## Higher-Order Functions (HOF)
+## Функция высшего порядка (ФВП)
 
-A function which takes a function as an argument and/or returns a function.
+Higher-Order Function (HOF)
 
-```js
-const filter = (predicate, xs) => xs.filter(predicate)
+Функция, которая принимает другую функцию как аргумент и/или возвращает функцию.
+
+```haskell
+Prelude> let add3 a = a + 3
+Prelude> map add3 [1..4]
+[4,5,6,7]
 ```
 
-```js
-const is = (type) => (x) => Object(x) instanceof type
-```
-
-```js
-filter(is(Number), [0, '1', 2, null]) // [0, 2]
+```haskell
+Prelude> filter (<4) [1..10]
+[1,2,3]
 ```
 
 ## Closure
