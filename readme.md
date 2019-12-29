@@ -1,8 +1,10 @@
 # Словарь сленга функционального программирования
 
-> This is a Russian translation of [Functional Programming Jargon][en] with a few Haskell examples from [Turkish version][tr].
+> This is a Russian translation of [Functional Programming Jargon][en] with some editing 
+> and examples in Haskell, many drawn from a [Turkish version][tr].
 
-> Эта статья - перевод и переработка публикации [Functional Programming Jargon][en], включая примеры на Нaskell из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript. 
+> Эта статья - перевод и переработка публикации [Functional Programming Jargon][en] c
+с примерами на Нaskell, в том числе из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript - она переведена на русский [здесь]()
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
@@ -10,6 +12,12 @@
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
 Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
+
+
+
+См https://www.haskell.org/tutorial/functions.html
+
+
 
 __Table of Contents__
 <!-- RM(noparent,notop) -->
@@ -90,6 +98,115 @@ console.log(arity) // 2
 
 // The arity of sum is 2
 ```
+
+## Функция
+
+Функция  `f :: X -> Y` каждому элементу `x` типа `X` сопоставляет элемент `f x` типа `Y`. 
+`x` называется аргументом функции, а `f x` - значением функции. 
+
+Функции, которые соответствуют данному определению, являются: 
+
+- тотальными (каждому возможному аргументу сопоставлено значение функции), 
+- детерминированными (каждому аргументу всегда соответствует одно и то же значение функции)
+- чистыми (вычисляют значение функции по аргументу и не производят никаких скрытых операций, приводящих к побочным эффектам).
+
+Результат функции полностью зависит только от аргумента, что делает функции независимыми от контекста, в котором они исполняются. Это делает функции удобными для работы и переиспользования.
+
+В обыденном понимании функцией может называться и та последовательность операций, которая  приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть процедурами, а не функциями.
+
+
+## Частичная функция 
+
+Partial function
+
+Частичная функция - это функция, для которой нарушается свойство тотальности. Частичная 
+функция недоопределена: существуют значения аргумента, для которых частичная функция не может вычислить результат или не закончит свое исполнение.
+
+Частичные функции запутывают анализ программы и могут приводить к ошибкам ее исполнения.
+
+Пример (о нем заранее предупреждается в документации):
+
+```haskell
+[1,2,3] !! 5
+```
+
+Для устранения частичных функций могут применяться следующие приемы:
+
+- автоматическая проверка на частичные функции на уровне компилятора - в этом случае программа не будет запущена пока частичные функции не будут устранены;
+- добавить в область значений функции дополнительное значение, которое выдается, когда 
+  аргумент не может быть обработан исходной функцией;
+- различные проверки допустимости исходных значений.
+
+(Подробнее см. например [здесь](https://wiki.haskell.org/Avoiding_partial_functions))
+
+
+<!--
+
+Partial functions add cognitive overhead, they are harder to reason about and can lead to runtime errors. Some examples:
+```js
+// example 1: sum of the list
+// sum :: [Number] -> Number
+const sum = arr => arr.reduce((a, b) => a + b)
+sum([1, 2, 3]) // 6
+sum([]) // TypeError: Reduce of empty array with no initial value
+
+// example 2: get the first item in list
+// first :: [A] -> A
+const first = a => a[0]
+first([42]) // 42
+first([]) // undefined
+//or even worse:
+first([[42]])[0] // 42
+first([])[0] // Uncaught TypeError: Cannot read property '0' of undefined
+
+// example 3: repeat function N times
+// times :: Number -> (Number -> Number) -> Number
+const times = n => fn => n && (fn(n), times(n - 1)(fn))
+times(3)(console.log)
+// 3
+// 2
+// 1
+times(-1)(console.log)
+// RangeError: Maximum call stack size exceeded
+```
+
+### Dealing with partial functions
+Partial functions are dangerous as they need to be treated with great caution. You might get an unexpected (wrong) result or run into runtime errors. Sometimes a partial function might not return at all. Being aware of and treating all these edge cases accordingly can become very tedious.
+Fortunately a partial function can be converted to a regular (or total) one. We can provide default values or use guards to deal with inputs for which the (previously) partial function is undefined. Utilizing the [`Option`](#Option) type, we can yield either `Some(value)` or `None` where we would otherwise have behaved unexpectedly:
+```js
+// example 1: sum of the list
+// we can provide default value so it will always return result
+// sum :: [Number] -> Number
+const sum = arr => arr.reduce((a, b) => a + b, 0)
+sum([1, 2, 3]) // 6
+sum([]) // 0
+
+// example 2: get the first item in list
+// change result to Option
+// first :: [A] -> Option A
+const first = a => a.length ? Some(a[0]) : None()
+first([42]).map(a => console.log(a)) // 42
+first([]).map(a => console.log(a)) // console.log won't execute at all
+//our previous worst case
+first([[42]]).map(a => console.log(a[0])) // 42
+first([]).map(a => console.log(a[0])) // won't execte, so we won't have error here
+// more of that, you will know by function return type (Option)
+// that you should use `.map` method to access the data and you will never forget
+// to check your input because such check become built-in into the function
+
+// example 3: repeat function N times
+// we should make function always terminate by changing conditions:
+// times :: Number -> (Number -> Number) -> Number
+const times = n => fn => n > 0 && (fn(n), times(n - 1)(fn))
+times(3)(console.log)
+// 3
+// 2
+// 1
+times(-1)(console.log)
+// won't execute anything
+```
+Making your partial functions total ones, these kinds of runtime errors can be prevented. Always returning a value will also make for code that is both easier to maintain as well as to reason about.
+-->
 
 ## Функция высшего порядка (ФВП)
 
@@ -963,82 +1080,12 @@ Position 1.5 2.8
 <!-- См. также информацию [по теории множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
 -->
 
-## Function
-A **function** `f :: A => B` is an expression - often called arrow or lambda expression - with **exactly one (immutable)** parameter of type `A` and **exactly one** return value of type `B`. That value depends entirely on the argument, making functions context-independant, or [referentially transparent](#referential-transparency). What is implied here is that a function must not produce any hidden [side effects](#side-effects) - a function is always [pure](#purity), by definition. These properties make functions pleasant to work with: they are entirely deterministic and therefore predictable. Functions enable working with code as data, abstracting over behaviour:
+Ссылки:
 
-```js
-// times2 :: Number -> Number
-const times2 = n => n * 2
-
-[1, 2, 3].map(times2) // [2, 4, 6]
-```
-
-## Функция
-
-A partial function is a [function](#function) which is not defined for all arguments - it might return an unexpected result or may never terminate. Partial functions add cognitive overhead, they are harder to reason about and can lead to runtime errors. Some examples:
-```js
-// example 1: sum of the list
-// sum :: [Number] -> Number
-const sum = arr => arr.reduce((a, b) => a + b)
-sum([1, 2, 3]) // 6
-sum([]) // TypeError: Reduce of empty array with no initial value
-
-// example 2: get the first item in list
-// first :: [A] -> A
-const first = a => a[0]
-first([42]) // 42
-first([]) // undefined
-//or even worse:
-first([[42]])[0] // 42
-first([])[0] // Uncaught TypeError: Cannot read property '0' of undefined
-
-// example 3: repeat function N times
-// times :: Number -> (Number -> Number) -> Number
-const times = n => fn => n && (fn(n), times(n - 1)(fn))
-times(3)(console.log)
-// 3
-// 2
-// 1
-times(-1)(console.log)
-// RangeError: Maximum call stack size exceeded
-```
-
-### Dealing with partial functions
-Partial functions are dangerous as they need to be treated with great caution. You might get an unexpected (wrong) result or run into runtime errors. Sometimes a partial function might not return at all. Being aware of and treating all these edge cases accordingly can become very tedious.
-Fortunately a partial function can be converted to a regular (or total) one. We can provide default values or use guards to deal with inputs for which the (previously) partial function is undefined. Utilizing the [`Option`](#Option) type, we can yield either `Some(value)` or `None` where we would otherwise have behaved unexpectedly:
-```js
-// example 1: sum of the list
-// we can provide default value so it will always return result
-// sum :: [Number] -> Number
-const sum = arr => arr.reduce((a, b) => a + b, 0)
-sum([1, 2, 3]) // 6
-sum([]) // 0
-
-// example 2: get the first item in list
-// change result to Option
-// first :: [A] -> Option A
-const first = a => a.length ? Some(a[0]) : None()
-first([42]).map(a => console.log(a)) // 42
-first([]).map(a => console.log(a)) // console.log won't execute at all
-//our previous worst case
-first([[42]]).map(a => console.log(a[0])) // 42
-first([]).map(a => console.log(a[0])) // won't execte, so we won't have error here
-// more of that, you will know by function return type (Option)
-// that you should use `.map` method to access the data and you will never forget
-// to check your input because such check become built-in into the function
-
-// example 3: repeat function N times
-// we should make function always terminate by changing conditions:
-// times :: Number -> (Number -> Number) -> Number
-const times = n => fn => n > 0 && (fn(n), times(n - 1)(fn))
-times(3)(console.log)
-// 3
-// 2
-// 1
-times(-1)(console.log)
-// won't execute anything
-```
-Making your partial functions total ones, these kinds of runtime errors can be prevented. Always returning a value will also make for code that is both easier to maintain as well as to reason about.
+- <http://degoes.net/articles/fp-glossary>
+- <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
+- <https://anton-k.github.io/ru-haskell-book/book/home.html>
+- <https://www.ibm.com/developerworks/ru/library/l-haskell2/index.html>
 
 
 ---
