@@ -1,27 +1,83 @@
-# Словарь сленга функционального программирования
+# Словарь сленга функционального программирования <!-- omit in TOC -->
 
-> This is a Russian translation of [Functional Programming Jargon][en] with some editing 
-> and examples in Haskell, many drawn from a [Turkish version][tr].
+## От переводчика <!-- omit in TOC -->
 
-> Эта статья - перевод и переработка публикации [Functional Programming Jargon][en] c
-с примерами на Нaskell, в том числе из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript - она переведена на русский [здесь]()
+This is a Russian translation of [Functional Programming Jargon][en] with some editing 
+and examples in Haskell, many drawn from a [Turkish version][tr].
+
+Эта статья - перевод и переработка публикации [Functional Programming Jargon][en] c
+с примерами на Нaskell, в том числе из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript - она переведена на русский [здесь](https://habr.com/ru/post/310172/).
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
+
+Что поменялось в этой переводе по сравнению с исходной статьей?
+
+- статьи сгруппированы по секциям
+- примеры на Haskell
+- добавлены ссылки для дальнейшего изучения
+- изменения в отдельных статьях
+
+См https://www.haskell.org/tutorial/functions.html
+
+## Введение <!-- omit in TOC -->
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
 Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 
 
-
-См https://www.haskell.org/tutorial/functions.html
-
-
-
 __Table of Contents__
-<!-- RM(noparent,notop) -->
 
+
+- [](#)
+- [1. Функции](#1-Функции)
+  - [Функция](#Функция)
+  - [Частичная функция](#Частичная-функция)
+  - [Функция высшего порядка (ФВП)](#Функция-высшего-порядка-ФВП)
+  - [Closure](#closure)
+  - [Partial Application](#partial-application)
+  - [Currying](#currying)
+  - [Auto Currying](#auto-currying)
+  - [Function Composition](#function-composition)
+  - [Arity](#arity)
+  - [Continuation](#continuation)
+  - [Purity](#purity)
+  - [Point-Free Style](#point-free-style)
+  - [Referential Transparency](#referential-transparency)
+  - [Equational Reasoning](#equational-reasoning)
+  - [Lambda](#lambda)
+  - [Lambda Calculus](#lambda-calculus)
+- [2. Общие понятия](#2-Общие-понятия)
+  - [Side effects](#side-effects)
+  - [Idempotent](#idempotent)
+  - [Predicate](#predicate)
+  - [Contracts](#contracts)
+  - [Category](#category)
+  - [Value](#value)
+  - [Constant](#constant)
+  - [Lazy evaluation](#lazy-evaluation)
+- [Типы](#Типы)
+  - [Functor](#functor)
+  - [Pointed Functor](#pointed-functor)
+  - [Lift](#lift)
+  - [Monoid](#monoid)
+  - [Monad](#monad)
+  - [Comonad](#comonad)
+  - [Applicative Functor](#applicative-functor)
+  - [Setoid](#setoid)
+  - [Semigroup](#semigroup)
+  - [Foldable](#foldable)
+  - [Lens](#lens)
+  - [Type Signatures](#type-signatures)
+  - [Алгебраический тип данных](#Алгебраический-тип-данных)
+    - [Тип-сумма (sum type)](#Тип-сумма-sum-type)
+    - [Тип-произведение (product type)](#Тип-произведение-product-type)
+    - [Дополнения](#Дополнения)
+  - [Ссылки](#Ссылки)
+
+
+# 
 
 Общие понятия
 
@@ -84,20 +140,7 @@ __Table of Contents__
   * [Apomorphism](#apomorphism)
 
 
-<!-- /RM -->
-
-## Arity
-
-The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
-
-```js
-const sum = (a, b) => a + b
-
-const arity = sum.length
-console.log(arity) // 2
-
-// The arity of sum is 2
-```
+# 1. Функции
 
 ## Функция
 
@@ -334,6 +377,20 @@ const floorAndToString = compose((val) => val.toString(), Math.floor) // Usage
 floorAndToString(121.212121) // '121'
 ```
 
+## Arity
+
+The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
+
+```js
+const sum = (a, b) => a + b
+
+const arity = sum.length
+console.log(arity) // 2
+
+// The arity of sum is 2
+```
+
+
 ## Continuation
 
 At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
@@ -401,6 +458,79 @@ greeting // "Hi, Brianne"
 
 ... and this one modifies state outside of the function.
 
+## Point-Free Style
+
+Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
+
+```js
+// Given
+const map = (fn) => (list) => list.map(fn)
+const add = (a) => (b) => a + b
+
+// Then
+
+// Not points-free - `numbers` is an explicit argument
+const incrementAll = (numbers) => map(add(1))(numbers)
+
+// Points-free - The list is an implicit argument
+const incrementAll2 = map(add(1))
+```
+
+`incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
+
+Points-free function definitions look just like normal assignments without `function` or `=>`.
+
+
+## Referential Transparency
+
+An expression that can be replaced with its value without changing the
+behavior of the program is said to be referentially transparent.
+
+Say we have function greet:
+
+```js
+const greet = () => 'Hello World!'
+```
+
+Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
+referentially transparent.
+
+##  Equational Reasoning
+
+When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
+
+## Lambda
+
+An anonymous function that can be treated like a value.
+
+```js
+;(function (a) {
+  return a + 1
+})
+
+;(a) => a + 1
+```
+Lambdas are often passed as arguments to Higher-Order functions.
+
+```js
+;[1, 2].map((a) => a + 1) // [2, 3]
+```
+
+You can assign a lambda to a variable.
+
+```js
+const add1 = (a) => a + 1
+```
+
+## Lambda Calculus
+A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
+
+
+
+
+
+# 2. Общие понятия
+
 ## Side effects
 
 A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
@@ -429,27 +559,6 @@ Math.abs(Math.abs(10))
 sort(sort(sort([2, 1])))
 ```
 
-## Point-Free Style
-
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
-
-```js
-// Given
-const map = (fn) => (list) => list.map(fn)
-const add = (a) => (b) => a + b
-
-// Then
-
-// Not points-free - `numbers` is an explicit argument
-const incrementAll = (numbers) => map(add(1))(numbers)
-
-// Points-free - The list is an implicit argument
-const incrementAll2 = map(add(1))
-```
-
-`incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
-
-Points-free function definitions look just like normal assignments without `function` or `=>`.
 
 ## Predicate
 A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
@@ -529,6 +638,25 @@ With the above two constants the following expression will always return `true`.
 john.age + five === ({name: 'John', age: 30}).age + (5)
 ```
 
+## Lazy evaluation
+
+Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
+
+```js
+const rand = function*() {
+  while (1 < 2) {
+    yield Math.random()
+  }
+}
+```
+
+```js
+const randIter = rand()
+randIter.next() // Each execution gives a random value, expression is evaluated on need.
+```
+
+# Типы
+
 ## Functor
 
 An object that implements a `map` function which, while running over each value in the object to produce a new object, adheres to two rules:
@@ -595,68 +723,6 @@ const increment = (x) => x + 1
 
 lift(increment)([2]) // [3]
 ;[2].map(increment) // [3]
-```
-
-
-## Referential Transparency
-
-An expression that can be replaced with its value without changing the
-behavior of the program is said to be referentially transparent.
-
-Say we have function greet:
-
-```js
-const greet = () => 'Hello World!'
-```
-
-Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
-referentially transparent.
-
-##  Equational Reasoning
-
-When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
-
-## Lambda
-
-An anonymous function that can be treated like a value.
-
-```js
-;(function (a) {
-  return a + 1
-})
-
-;(a) => a + 1
-```
-Lambdas are often passed as arguments to Higher-Order functions.
-
-```js
-;[1, 2].map((a) => a + 1) // [2, 3]
-```
-
-You can assign a lambda to a variable.
-
-```js
-const add1 = (a) => a + 1
-```
-
-## Lambda Calculus
-A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
-
-## Lazy evaluation
-
-Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
-
-```js
-const rand = function*() {
-  while (1 < 2) {
-    yield Math.random()
-  }
-}
-```
-
-```js
-const randIter = rand()
-randIter.next() // Each execution gives a random value, expression is evaluated on need.
 ```
 
 ## Monoid
@@ -786,119 +852,6 @@ This gives you an array of functions that you can call `ap` on to get the result
 ```js
 partiallyAppliedAdds.ap(arg2) // [5, 6, 7, 8]
 ```
-
-## Morphism
-
-A transformation function.
-
-### Endomorphism
-
-A function where the input type is the same as the output.
-
-```js
-// uppercase :: String -> String
-const uppercase = (str) => str.toUpperCase()
-
-// decrement :: Number -> Number
-const decrement = (x) => x - 1
-```
-
-### Isomorphism
-
-A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
-
-For example, 2D coordinates could be stored as an array `[2,3]` or object `{x: 2, y: 3}`.
-
-```js
-// Providing functions to convert in both directions makes them isomorphic.
-const pairToCoords = (pair) => ({x: pair[0], y: pair[1]})
-
-const coordsToPair = (coords) => [coords.x, coords.y]
-
-coordsToPair(pairToCoords([1, 2])) // [1, 2]
-
-pairToCoords(coordsToPair({x: 1, y: 2})) // {x: 1, y: 2}
-```
-
-### Homomorphism
-
-A homomorphism is just a structure preserving map. In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
-
-```js
-A.of(f).ap(A.of(x)) == A.of(f(x))
-
-Either.of(_.toUpper).ap(Either.of("oreos")) == Either.of(_.toUpper("oreos"))
-```
-
-### Catamorphism
-
-A `reduceRight` function that applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value.
-
-```js
-const sum = xs => xs.reduceRight((acc, x) => acc + x, 0)
-
-sum([1, 2, 3, 4, 5]) // 15
-```
-
-### Anamorphism
-
-An `unfold` function. An `unfold` is the opposite of `fold` (`reduce`). It generates a list from a single value.
-
-```js
-const unfold = (f, seed) => {
-  function go(f, seed, acc) {
-    const res = f(seed);
-    return res ? go(f, res[1], acc.concat([res[0]])) : acc;
-  }
-  return go(f, seed, [])
-}
-```
-
-```js
-const countDown = n => unfold((n) => {
-  return n <= 0 ? undefined : [n, n - 1]
-}, n)
-
-countDown(5) // [5, 4, 3, 2, 1]
-```
-
-### Hylomorphism
-
-The combination of anamorphism and catamorphism.
-
-### Paramorphism
-
-A function just like `reduceRight`. However, there's a difference:
-
-In paramorphism, your reducer's arguments are the current value, the reduction of all previous values, and the list of values that formed that reduction.
-
-```js
-// Obviously not safe for lists containing `undefined`,
-// but good enough to make the point.
-const para = (reducer, accumulator, elements) => {
-  if (elements.length === 0)
-    return accumulator
-
-  const head = elements[0]
-  const tail = elements.slice(1)
-
-  return reducer(head, tail, para(reducer, accumulator, tail))
-}
-
-const suffixes = list => para(
-  (x, xs, suffxs) => [xs, ... suffxs],
-  [],
-  list
-)
-
-suffixes([1, 2, 3, 4, 5]) // [[2, 3, 4, 5], [3, 4, 5], [4, 5], [5], []]
-```
-
-The third parameter in the reducer (in the above example, `[x, ... xs]`) is kind of like having a history of what got you to your current acc value.
-
-### Apomorphism
-
-it's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism. Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated, apomorphism lets you `unfold` with the potential to return early.
 
 ## Setoid
 
@@ -1077,17 +1030,17 @@ data Position = Position Float Float
 Position 1.5 2.8
 ```
 
-<!-- См. также информацию [по теории множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
--->
+### Дополнения
 
-Ссылки:
+- [Теория множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
+- [Бывают ли алгебраические типы данных вне типа-суммы и произведения?](https://stackoverflow.com/questions/59509294/are-there-algebraic-data-types-outside-of-sum-and-product)
+
+
+## Ссылки
 
 - <http://degoes.net/articles/fp-glossary>
 - <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
 - <https://anton-k.github.io/ru-haskell-book/book/home.html>
 - <https://www.ibm.com/developerworks/ru/library/l-haskell2/index.html>
-
-
----
-
-__P.S:__ This repo is successful due to the wonderful [contributions](https://github.com/hemanth/functional-programming-jargon/graphs/contributors)!
+- ohaskell
+- ruhaskell.org
