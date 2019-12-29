@@ -2,8 +2,7 @@
 
 ## От переводчика <!-- omit in TOC -->
 
-This is a Russian translation of [Functional Programming Jargon][en] with some editing 
-and examples in Haskell, many drawn from a [Turkish version][tr].
+This is a Russian translation of [Functional Programming Jargon][en] with some additional editing and content and examples in Haskell. Many code examples are drawn from a [Haskell- Turkish version][tr].
 
 Эта статья - перевод и переработка публикации [Functional Programming Jargon][en] c
 с примерами на Нaskell, в том числе из [турецкой версии][tr] перевода. Оригинальная статья использует примеры на JavaScript - она переведена на русский [здесь](https://habr.com/ru/post/310172/).
@@ -11,26 +10,28 @@ and examples in Haskell, many drawn from a [Turkish version][tr].
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
-Что поменялось в этой переводе по сравнению с исходной статьей?
+Что поменялось в переводе по сравнению с исходной статьей?
 
 - статьи сгруппированы по секциям
-- примеры на Haskell
-- добавлены ссылки для дальнейшего изучения
+- все примеры на языке Haskell
+- добавлены раздел ссылки с русскоязычными и аннглийским ресурсами
 - изменения в отдельных статьях
+- про морфизмы - убрали в отдельный файл, и не переводили
+- не проверяется соответствие [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 
-См https://www.haskell.org/tutorial/functions.html
+Стиль изложения и требования к содержанию изложены в [contributing.md](contributing.md). 
+Этот короткий чеклист по требования к изложению технического материала может быть полезен и в других проектах.
+
 
 ## Введение <!-- omit in TOC -->
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
+__Содержание__
 
+- https://www.haskell.org/tutorial/functions.html
+- https://wiki.haskell.org/Function
 
-__Table of Contents__
-
-
-- [](#)
 - [1. Функции](#1-Функции)
   - [Функция](#Функция)
   - [Частичная функция](#Частичная-функция)
@@ -44,11 +45,12 @@ __Table of Contents__
   - [Continuation](#continuation)
   - [Purity](#purity)
   - [Point-Free Style](#point-free-style)
-  - [Referential Transparency](#referential-transparency)
-  - [Equational Reasoning](#equational-reasoning)
   - [Lambda](#lambda)
   - [Lambda Calculus](#lambda-calculus)
+  - [Type Signatures](#type-signatures)
 - [2. Общие понятия](#2-Общие-понятия)
+  - [Referential Transparency](#referential-transparency)
+  - [Equational Reasoning](#equational-reasoning)
   - [Side effects](#side-effects)
   - [Idempotent](#idempotent)
   - [Predicate](#predicate)
@@ -57,7 +59,10 @@ __Table of Contents__
   - [Value](#value)
   - [Constant](#constant)
   - [Lazy evaluation](#lazy-evaluation)
-- [Типы](#Типы)
+- [3. Типы](#3-Типы)
+  - [Алгебраический тип данных](#Алгебраический-тип-данных)
+    - [Тип-сумма (sum type)](#Тип-сумма-sum-type)
+    - [Тип-произведение (product type)](#Тип-произведение-product-type)
   - [Functor](#functor)
   - [Pointed Functor](#pointed-functor)
   - [Lift](#lift)
@@ -69,76 +74,6 @@ __Table of Contents__
   - [Semigroup](#semigroup)
   - [Foldable](#foldable)
   - [Lens](#lens)
-  - [Type Signatures](#type-signatures)
-  - [Алгебраический тип данных](#Алгебраический-тип-данных)
-    - [Тип-сумма (sum type)](#Тип-сумма-sum-type)
-    - [Тип-произведение (product type)](#Тип-произведение-product-type)
-    - [Дополнения](#Дополнения)
-  - [Ссылки](#Ссылки)
-
-
-# 
-
-Общие понятия
-
-* [Referential Transparency](#referential-transparency)
-* [Equational Reasoning](#equational-reasoning)
-* [Category](#category)
-* [Value](#value)
-* [Constant](#constant)
-* [Purity](#purity)
-* [Side effects](#side-effects)
-* [Continuation](#continuation)
-* [Idempotent](#idempotent)
-* [Predicate](#predicate)
-* [Contracts](#contracts)
-
-Функции 
-
-* [Function](#function)
-* [Higher-Order Functions (HOF)](#higher-order-functions-hof)
-* [Closure](#closure)
-* [Partial Application](#partial-application)
-* [Partial function](#partial-function)
-* [Currying](#currying)
-* [Auto Currying](#auto-currying)
-* [Function Composition](#function-composition)
-* [Lambda](#lambda)
-* [Lambda Calculus](#lambda-calculus)
-* [Lazy evaluation](#lazy-evaluation)
-* [Point-Free Style](#point-free-style)
-* [Type Signatures](#type-signatures)
-
-Типы
-
-* [Algebraic data type](#algebraic-data-type)
-  * [Sum type](#sum-type)
-  * [Product type](#product-type)
-* [Arity](#arity)
-* [Functor](#functor)
-* [Pointed Functor](#pointed-functor)
-* [Lift](#lift)
-* [Monoid](#monoid)
-* [Monad](#monad)
-* [Comonad](#comonad)
-* [Applicative Functor](#applicative-functor)
-* [Setoid](#setoid)
-* [Semigroup](#semigroup)
-* [Foldable](#foldable)
-* [Lens](#lens)
-
-Морфизмы
-
-* [Morphism](#morphism)
-  * [Endomorphism](#endomorphism)
-  * [Isomorphism](#isomorphism)
-  * [Homomorphism](#homomorphism)
-  * [Catamorphism](#catamorphism)
-  * [Anamorphism](#anamorphism)
-  * [Hylomorphism](#hylomorphism)
-  * [Paramorphism](#paramorphism)
-  * [Apomorphism](#apomorphism)
-
 
 # 1. Функции
 
@@ -481,24 +416,6 @@ const incrementAll2 = map(add(1))
 Points-free function definitions look just like normal assignments without `function` or `=>`.
 
 
-## Referential Transparency
-
-An expression that can be replaced with its value without changing the
-behavior of the program is said to be referentially transparent.
-
-Say we have function greet:
-
-```js
-const greet = () => 'Hello World!'
-```
-
-Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
-referentially transparent.
-
-##  Equational Reasoning
-
-When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
-
 ## Lambda
 
 An anonymous function that can be treated like a value.
@@ -526,10 +443,61 @@ const add1 = (a) => a + 1
 A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
 
 
+## Type Signatures
 
+Often functions in JavaScript will include comments that indicate the types of their arguments and return values.
 
+There's quite a bit of variance across the community but they often follow the following patterns:
+
+```js
+// functionName :: firstArgType -> secondArgType -> returnType
+
+// add :: Number -> Number -> Number
+const add = (x) => (y) => x + y
+
+// increment :: Number -> Number
+const increment = (x) => x + 1
+```
+
+If a function accepts another function as an argument it is wrapped in parentheses.
+
+```js
+// call :: (a -> b) -> a -> b
+const call = (f) => (x) => f(x)
+```
+
+The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type. The following version of `map` takes a function that transforms a value of some type `a` into another type `b`, an array of values of type `a`, and returns an array of values of type `b`.
+
+```js
+// map :: (a -> b) -> [a] -> [b]
+const map = (f) => (list) => list.map(f)
+```
+
+__Further reading__
+* [Ramda's type signatures](https://github.com/ramda/ramda/wiki/Type-Signatures)
+* [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch7.html#whats-your-type)
+* [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
 
 # 2. Общие понятия
+
+## Referential Transparency
+
+An expression that can be replaced with its value without changing the
+behavior of the program is said to be referentially transparent.
+
+Say we have function greet:
+
+```js
+const greet = () => 'Hello World!'
+```
+
+Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
+referentially transparent.
+
+##  Equational Reasoning
+
+When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
+
 
 ## Side effects
 
@@ -655,7 +623,66 @@ const randIter = rand()
 randIter.next() // Each execution gives a random value, expression is evaluated on need.
 ```
 
-# Типы
+
+# 3. Типы
+
+
+## Алгебраический тип данных
+
+Составной тип, который получается путем из соединения нескольких других типов. Соединение типов называется *алгеброй*, что повлияло на название термина. Чаще всего рассматриваются тип-сумма и тип-произведение.
+
+### Тип-сумма (sum type)
+
+Тип-сумма - это комбинация двух и более типов в новый тип таким образом, что число возможных значений в новом типе будет соответствовать сумме входящих элементов.
+
+Булевский тип данных "правда-ложь" является самым простым типом-суммой:
+
+```haskell
+data Bool = False | True
+```
+
+Три цвета светофора также тип-сумма:
+
+```haskell
+data TrafficLight = Red | Yellow | Green
+```
+
+В примерах выше тип-сумма построен из простейших элементов, но эти элементы могут быть и более сложными.
+Тип `Move` описывает движение робота по прямой с целочисленными шагами вперед, назад или с остановкой. 
+
+```haskell
+data Move = Stop | Ahead Int | Back Int
+```
+
+Шаги робота теперь можно описать с помощью списка типа `[Move]`, например, `[Ahead 1, Stop, Stop, Back -2]` (шаг вперед, два назад).
+
+Типы `Maybe` и `Either`,  использующиеся в языке Хаскелл для управлениями ситуациями с нежелательными результатами вычислений, также являются типами-суммой. В некоторых других функциональных языках программирования - это тип `Option`.
+
+### Тип-произведение (product type)
+
+Тип-произведение объединяет элементы таким образом, что количество новых значений представляет собой произведение возможных количеств входящих значений. 
+
+В большинстве языков программирования есть тип кортеж (tuple), который является самым простым типом-произведением. Например, кортеж из трех булевых значений типа `(Bool, Bool, Bool)` имеет  2\*2\*2 = 8 значений.
+
+Привычные структры данных, например, записи с полями значений, также являются типами-произведением.
+
+```haskell
+data Person = Person {name:String , age::Int}
+Person "LittleBaby" 2
+```
+
+Место точки на плоскости соcтоит их двух координат, которые можно выразить типом-произведением двух значений типа `Float`:
+
+```haskell
+data Position = Position Float Float
+Position 1.5 2.8
+```
+
+### Дополнения <!-- omit in TOC -->
+
+- [Теория множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
+- [Бывают ли алгебраические типы данных вне типа-суммы и произведения?](https://stackoverflow.com/questions/59509294/are-there-algebraic-data-types-outside-of-sum-and-product)
+
 
 ## Functor
 
@@ -944,99 +971,9 @@ Other implementations:
 * [partial.lenses](https://github.com/calmm-js/partial.lenses) - Tasty syntax sugar and a lot of powerful features
 * [nanoscope](http://www.kovach.me/nanoscope/) - Fluent-interface
 
-## Type Signatures
-
-Often functions in JavaScript will include comments that indicate the types of their arguments and return values.
-
-There's quite a bit of variance across the community but they often follow the following patterns:
-
-```js
-// functionName :: firstArgType -> secondArgType -> returnType
-
-// add :: Number -> Number -> Number
-const add = (x) => (y) => x + y
-
-// increment :: Number -> Number
-const increment = (x) => x + 1
-```
-
-If a function accepts another function as an argument it is wrapped in parentheses.
-
-```js
-// call :: (a -> b) -> a -> b
-const call = (f) => (x) => f(x)
-```
-
-The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type. The following version of `map` takes a function that transforms a value of some type `a` into another type `b`, an array of values of type `a`, and returns an array of values of type `b`.
-
-```js
-// map :: (a -> b) -> [a] -> [b]
-const map = (f) => (list) => list.map(f)
-```
-
-__Further reading__
-* [Ramda's type signatures](https://github.com/ramda/ramda/wiki/Type-Signatures)
-* [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch7.html#whats-your-type)
-* [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
-
-## Алгебраический тип данных
-
-Составной тип, который получается путем из соединения нескольких других типов. Соединение типов называется *алгеброй*, что повлияло на название термина. Чаще всего рассматриваются тип-сумма и тип-произведение.
-
-### Тип-сумма (sum type)
-
-Тип-сумма - это комбинация двух и более типов в новый тип таким образом, что число возможных значений в новом типе будет соответствовать сумме входящих элементов.
-
-Булевский тип данных "правда-ложь" является самым простым типом-суммой:
-
-```haskell
-data Bool = False | True
-```
-
-Три цвета светофора также тип-сумма:
-
-```haskell
-data TrafficLight = Red | Yellow | Green
-```
-
-В примерах выше тип-сумма построен из простейших элементов, но эти элементы могут быть и более сложными.
-Тип `Move` описывает движение робота по прямой с целочисленными шагами вперед, назад или с остановкой. 
-
-```haskell
-data Move = Stop | Ahead Int | Back Int
-```
-
-Шаги робота теперь можно описать с помощью списка типа `[Move]`, например, `[Ahead 1, Stop, Stop, Back -2]` (шаг вперед, два назад).
-
-Типы `Maybe` и `Either`,  использующиеся в языке Хаскелл для управлениями ситуациями с нежелательными результатами вычислений, также являются типами-суммой. В некоторых других функциональных языках программирования - это тип `Option`.
-
-### Тип-произведение (product type)
-
-Тип-произведение объединяет элементы таким образом, что количество новых значений представляет собой произведение возможных количеств входящих значений. 
-
-В большинстве языков программирования есть тип кортеж (tuple), который является самым простым типом-произведением. Например, кортеж из трех булевых значений типа `(Bool, Bool, Bool)` имеет  2\*2\*2 = 8 значений.
-
-Привычные структры данных, например, записи с полями значений, также являются типами-произведением.
-
-```haskell
-data Person = Person {name:String , age::Int}
-Person "LittleBaby" 2
-```
-
-Место точки на плоскости соcтоит их двух координат, которые можно выразить типом-произведением двух значений типа `Float`:
-
-```haskell
-data Position = Position Float Float
-Position 1.5 2.8
-```
-
-### Дополнения
-
-- [Теория множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
-- [Бывают ли алгебраические типы данных вне типа-суммы и произведения?](https://stackoverflow.com/questions/59509294/are-there-algebraic-data-types-outside-of-sum-and-product)
 
 
-## Ссылки
+__Ссылки__
 
 - <http://degoes.net/articles/fp-glossary>
 - <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
