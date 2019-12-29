@@ -18,17 +18,16 @@
 - не проверяется соответствие терминологии на [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 - изменения в отдельных статьях
 
-Стиль изложения и требования к содержанию  изложены в [contributing.md](contributing.md). 
-Этот короткий чеклист по требования к изложению технического материала может быть полезен и в других проектах.
+Стиль изложения и требования к содержанию исходного глоссария изложены в [contributing.md](contributing.md). 
+Этот короткий чеклист по требованиям к изложению технического материала может быть полезен и в других проектах.
+
+<!-- Перевод выполнен ..., reviewed by ...  -->
 
 ## Введение <!-- omit in TOC -->
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
 __Содержание__
-
-- https://www.haskell.org/tutorial/functions.html
-- https://wiki.haskell.org/Function
 
 - [1. Функции](#1-Функции)
   - [Функция](#Функция)
@@ -75,6 +74,11 @@ __Содержание__
 
 # 1. Функции
 
+<!--
+- https://www.haskell.org/tutorial/functions.html
+- https://wiki.haskell.org/Function
+-->
+
 ## Функция
 
 Функция  `f :: X -> Y` каждому элементу `x` типа `X` сопоставляет элемент `f x` типа `Y`. 
@@ -84,11 +88,11 @@ __Содержание__
 
 - тотальными (каждому возможному аргументу сопоставлено значение функции), 
 - детерминированными (каждому аргументу всегда соответствует одно и то же значение функции)
-- чистыми (вычисляют значение функции по аргументу и не производят никаких скрытых операций, приводящих к побочным эффектам).
+- чистыми (вычисляют значение по аргументу и не производят никаких скрытых операций, приводящих к побочным эффектам).
 
-Результат функции полностью зависит только от аргумента, что делает функции независимыми от контекста, в котором они исполняются. Это делает функции удобными для работы и переиспользования.
+Результат функции полностью зависит только от аргумента, что делает функции независимыми от контекста, в котором они исполняются. <!--Это делает функции удобными для работы и переиспользования. -->
 
-В обыденном понимании функцией может называться и та последовательность операций, которая  приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть процедурами, а не функциями.
+*Примечание:* в обыденном понимании функцией может называться и та последовательность операций, которая  приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть процедурами, а не функциями.
 
 
 ## Частичная функция 
@@ -100,7 +104,7 @@ Partial function
 
 Частичные функции запутывают анализ программы и могут приводить к ошибкам ее исполнения.
 
-Пример (о нем заранее предупреждается в документации):
+Пример запроса несуществующего элемента списка:
 
 ```haskell
 [1,2,3] !! 5
@@ -235,7 +239,6 @@ __Further reading/Sources__
 
 Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
 
-
 ```js
 // Helper to create partially applied functions
 // Takes a function and some arguments
@@ -282,24 +285,6 @@ add2(10) // 12
 
 ```
 
-## Auto Currying
-Transforming a function that takes multiple arguments into one that if given less than its correct number of arguments returns a function that takes the rest. When the function gets the correct number of arguments it is then evaluated.
-
-lodash & Ramda have a `curry` function that works this way.
-
-```js
-const add = (x, y) => x + y
-
-const curriedAdd = _.curry(add)
-curriedAdd(1, 2) // 3
-curriedAdd(1) // (y) => 1 + y
-curriedAdd(1)(2) // 3
-```
-
-__Further reading__
-* [Favoring Curry](http://fr.umio.us/favoring-curry/)
-* [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA)
-
 ## Function Composition
 
 The act of putting two functions together to form a third function where the output of one function is the input of the other.
@@ -323,37 +308,6 @@ console.log(arity) // 2
 // The arity of sum is 2
 ```
 
-
-## Continuation
-
-At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
-
-```js
-const printAsString = (num) => console.log(`Given ${num}`)
-
-const addOneAndContinue = (num, cc) => {
-  const result = num + 1
-  cc(result)
-}
-
-addOneAndContinue(2, printAsString) // 'Given 3'
-```
-
-Continuations are often seen in asynchronous programming when the program needs to wait to receive data before it can continue. The response is often passed off to the rest of the program, which is the continuation, once it's been received.
-
-```js
-const continueProgramWith = (data) => {
-  // Continues program with data
-}
-
-readFileAsync('path/to/file', (err, response) => {
-  if (err) {
-    // handle error
-    return
-  }
-  continueProgramWith(response)
-})
-```
 
 ## Purity
 
@@ -441,6 +395,32 @@ const add1 = (a) => a + 1
 A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
 
 
+## Idempotent
+
+A function is idempotent if reapplying it to its result does not produce a different result.
+
+```
+f(f(x)) ≍ f(x)
+```
+
+```js
+Math.abs(Math.abs(10))
+```
+
+```js
+sort(sort(sort([2, 1])))
+```
+
+## Predicate
+
+A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
+
+```js
+const predicate = (a) => a > 2
+
+;[1, 2, 3, 4].filter(predicate) // [3, 4]
+```
+
 ## Type Signatures
 
 Often functions in JavaScript will include comments that indicate the types of their arguments and return values.
@@ -509,30 +489,35 @@ const differentEveryTime = new Date()
 console.log('IO is a side effect!')
 ```
 
-## Idempotent
+## Continuation
 
-A function is idempotent if reapplying it to its result does not produce a different result.
-
-```
-f(f(x)) ≍ f(x)
-```
+At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
 
 ```js
-Math.abs(Math.abs(10))
+const printAsString = (num) => console.log(`Given ${num}`)
+
+const addOneAndContinue = (num, cc) => {
+  const result = num + 1
+  cc(result)
+}
+
+addOneAndContinue(2, printAsString) // 'Given 3'
 ```
 
-```js
-sort(sort(sort([2, 1])))
-```
-
-
-## Predicate
-A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
+Continuations are often seen in asynchronous programming when the program needs to wait to receive data before it can continue. The response is often passed off to the rest of the program, which is the continuation, once it's been received.
 
 ```js
-const predicate = (a) => a > 2
+const continueProgramWith = (data) => {
+  // Continues program with data
+}
 
-;[1, 2, 3, 4].filter(predicate) // [3, 4]
+readFileAsync('path/to/file', (err, response) => {
+  if (err) {
+    // handle error
+    return
+  }
+  continueProgramWith(response)
+})
 ```
 
 ## Contracts
@@ -576,6 +561,8 @@ __Further reading__
 * [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 
 ## Value
+
+<!-- Term -->
 
 Anything that can be assigned to a variable.
 
@@ -724,7 +711,7 @@ ES2015 adds `Array.of` making arrays a pointed functor.
 Array.of(1) // [1]
 ```
 
-## Lift
+## Lifting
 
 Lifting is when you take a value and put it into an object like a [functor](#pointed-functor). If you lift a function into an [Applicative Functor](#applicative-functor) then you can make it work on values that are also in that functor.
 
@@ -969,9 +956,7 @@ Other implementations:
 * [partial.lenses](https://github.com/calmm-js/partial.lenses) - Tasty syntax sugar and a lot of powerful features
 * [nanoscope](http://www.kovach.me/nanoscope/) - Fluent-interface
 
-
-
-__Ссылки__
+# Ссылки <!-- omit in TOC -->
 
 - <http://degoes.net/articles/fp-glossary>
 - <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
