@@ -1,4 +1,4 @@
-> This is a Russian translation of [Functional Programming Jargon][en] with some additional editing and content and examples in Haskell. Many code examples are drawn from a [Haskell- Turkish version][tr].
+> This is a Russian translation of [Functional Programming Jargon][en] with some additional editing and examples in Haskell. Many code examples are drawn from a [Haskell - Turkish version][tr].
 
 # Словарь сленга функционального программирования <!-- omit in TOC -->
 
