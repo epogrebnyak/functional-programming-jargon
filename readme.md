@@ -32,23 +32,25 @@ __Содержание__
 - [1. Функции](#1-Функции)
   - [Функция](#Функция)
   - [Частичная функция](#Частичная-функция)
-  - [Функция высшего порядка (ФВП)](#Функция-высшего-порядка-ФВП)
+  - [Чистота и побочные эффекты](#Чистота-и-побочные-эффекты)
+    - [Чистота](#Чистота)
+    - [Side effects](#side-effects)
   - [Closure](#closure)
-  - [Partial Application](#partial-application)
-  - [Currying](#currying)
+  - [Каррирование и частичное применение](#Каррирование-и-частичное-применение)
+    - [Каррирование](#Каррирование)
+    - [Частичное применение](#Частичное-применение)
   - [Function Composition](#function-composition)
   - [Arity](#arity)
-  - [Purity](#purity)
   - [Point-Free Style](#point-free-style)
   - [Lambda](#lambda)
   - [Lambda Calculus](#lambda-calculus)
+  - [Функция высшего порядка (ФВП)](#Функция-высшего-порядка-ФВП)
   - [Idempotent](#idempotent)
-  - [Predicate](#predicate)
+  - [Предикат](#Предикат)
   - [Type Signatures](#type-signatures)
 - [2. Общие понятия](#2-Общие-понятия)
   - [Referential Transparency](#referential-transparency)
   - [Equational Reasoning](#equational-reasoning)
-  - [Side effects](#side-effects)
   - [Continuation](#continuation)
   - [Contracts](#contracts)
   - [Category](#category)
@@ -80,6 +82,8 @@ __Содержание__
 
 ## Функция
 
+*Function*
+
 Функция  `f :: X -> Y` каждому элементу `x` типа `X` сопоставляет элемент `f x` типа `Y`. 
 `x` называется аргументом функции, а `f x` - значением функции. 
 
@@ -91,12 +95,12 @@ __Содержание__
 
 Результат функции полностью зависит только от аргумента, что делает функции независимыми от контекста, в котором они исполняются. <!--Это делает функции удобными для работы и переиспользования. -->
 
-*Примечание:* в обыденном понимании функцией может называться и та последовательность операций, которая  приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть процедурами, а не функциями.
+*Примечание:* в обыденном понимании функцией может называться и та последовательность операций,которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть процедурами, а не функциями.
 
 
 ## Частичная функция 
 
-Partial function
+*Partial function*
 
 Частичная функция - это функция, для которой нарушается свойство тотальности. Частичная 
 функция недоопределена: существуют значения аргумента, для которых частичная функция не может вычислить результат или не закончит свое исполнение.
@@ -111,13 +115,11 @@ Partial function
 
 Для устранения частичных функций могут применяться следующие приемы:
 
-- автоматическая проверка на частичные функции на уровне компилятора - в этом случае программа не будет запущена пока частичные функции не будут устранены;
-- добавить в область значений функции дополнительное значение, которое выдается, когда 
-  аргумент не может быть обработан исходной функцией;
+- автоматическая проверка на частичные функции на уровне компилятора - в этом случае программа не будет запущена, выведется сообщение об ошибке;
+- добавить в область значений функции дополнительное значение, которое выдается функцией, когда аргумент не может быть обработан;
 - различные проверки допустимости исходных значений.
 
-(Подробнее см. например [здесь](https://wiki.haskell.org/Avoiding_partial_functions))
-
+Подробнее см. например [здесь](https://wiki.haskell.org/Avoiding_partial_functions).
 
 <!--
 
@@ -189,21 +191,29 @@ Making your partial functions total ones, these kinds of runtime errors can be p
 
 -->
 
-## Функция высшего порядка (ФВП)
+## Чистота и побочные эффекты
 
-Higher-Order Function (HOF)
+### Чистота 
 
-Функция, которая принимает другую функцию как аргумент и/или возвращает функцию как результат.
+*Purity*
 
-```haskell
-Prelude> let add3 a = a + 3
-Prelude> map add3 [1..4]
-[4,5,6,7]
+Функция является чистой, если ее значение определяется только 
+значением аргумента и если она не производит побочных эффектов.
+
+Все функции в языке Haskell являются чистыми. Настолько чистыми, что для того, 
+чтобы получить побочный эффект в виде записи на диск или вывода на экран надо 
+еще постараться.
+
+### Side effects
+
+A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
+
+```js
+const differentEveryTime = new Date()
 ```
 
-```haskell
-Prelude> filter (<4) [1..10]
-[1,2,3]
+```js
+console.log('IO is a side effect!')
 ```
 
 ## Closure
@@ -236,55 +246,56 @@ __Further reading/Sources__
 * [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
 * [JavaScript Closures highly voted discussion](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
 
-## Partial Application
+## Каррирование и частичное применение
 
-Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
+### Каррирование
 
-```js
-// Helper to create partially applied functions
-// Takes a function and some arguments
-const partial = (f, ...args) =>
-  // returns a function that takes the rest of the arguments
-  (...moreArgs) =>
-    // and calls the original function with all of them
-    f(...args, ...moreArgs)
+*Currying*
 
-// Something to apply
-const add3 = (a, b, c) => a + b + c
+Преобразование функции, которая принимает несколько аргументов, в функцию,
+которая принимает один аргумент и возвращает функцию, которая может быть применена к последующим аргументам.
 
-// Partially applying `2` and `3` to `add3` gives you a one-argument function
-const fivePlus = partial(add3, 2, 3) // (c) => 2 + 3 + c
+В примере ниже функция `sum` обрабатывает кортеж из двух значений `(a, b)`. Функция 
+`curry` преобразует функцию `sum` в `curriedSum`, которая последовательно принимает 
+два аргумента `a` и `b`. 
 
-fivePlus(4) // 9
+```haskell
+Prelude> let sum (a, b) = a + b
+Prelude> let curriedSum = curry sum
+Prelude> curriedSum 40 2
+42
+``` 
+
+В отличие от других языков программирования функции многих аргументов в Haskell каррированы по умолчанию. Это значит, что частичное применение доступно для всех функций многих аргументов
+и не требует специальных действий (см. ниже). 
+
+
+- [Currying](https://wiki.haskell.org/Currying)
+- [What is the difference between currying and partial application?](https://stackoverflow.com/questions/218025/what-is-the-difference-between-currying-and-partial-application)
+
+
+### Частичное применение
+
+*Partial Application*
+
+Частичное применение означает вызов функции с меньшим количеством аргументов, чем необходимо для ее завершения. В этом случае создается новая функция, которая будет обрабатывать оставшиеся аргументы. 
+
+Частичное применение позволяет из более общих или сложных функций получать более простые функции со специфическим поведением.
+
+```haskell
+-- Создаем функцию сложения двух элементов
+Prelude> let add x y = x + y
+
+-- Как создать функцию для увеличения аргумента на единицу?
+-- Частично применим функцию add к значению 1,
+-- в результате получилась новая функция, которой мы присвоили имя inc
+Prelude> let inc = add 1
+Prelude> inc 8
+Prelude> 9 
 ```
+(Не путать с частичной функцией - это похожие названия, означающие разные вещи.)
 
-You can also use `Function.prototype.bind` to partially apply a function in JS:
-
-```js
-const add1More = add3.bind(null, 2, 3) // (c) => 2 + 3 + c
-```
-
-Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying) functions are automatically partially applied.
-
-
-## Currying
-
-The process of converting a function that takes multiple arguments into a function that takes them one at a time.
-
-Each time the function is called it only accepts one argument and returns a function that takes one argument until all arguments are passed.
-
-```js
-const sum = (a, b) => a + b
-
-const curriedSum = (a) => (b) => a + b
-
-curriedSum(40)(2) // 42.
-
-const add2 = curriedSum(2) // (b) => 2 + b
-
-add2(10) // 12
-
-```
+- [Partial application](https://wiki.haskell.org/Partial_application)
 
 ## Function Composition
 
@@ -310,41 +321,7 @@ console.log(arity) // 2
 ```
 
 
-## Purity
 
-A function is pure if the return value is only determined by its
-input values, and does not produce side effects.
-
-```js
-const greet = (name) => `Hi, ${name}`
-
-greet('Brianne') // 'Hi, Brianne'
-```
-
-As opposed to each of the following:
-
-```js
-window.name = 'Brianne'
-
-const greet = () => `Hi, ${window.name}`
-
-greet() // "Hi, Brianne"
-```
-
-The above example's output is based on data stored outside of the function...
-
-```js
-let greeting
-
-const greet = (name) => {
-  greeting = `Hi, ${name}`
-}
-
-greet('Brianne')
-greeting // "Hi, Brianne"
-```
-
-... and this one modifies state outside of the function.
 
 ## Point-Free Style
 
@@ -396,6 +373,24 @@ const add1 = (a) => a + 1
 A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
 
 
+## Функция высшего порядка (ФВП)
+
+Higher-Order Function (HOF)
+
+Функция, которая принимает другую функцию как аргумент и/или возвращает функцию как результат.
+
+```haskell
+Prelude> let add3 a = a + 3
+Prelude> map add3 [1..4]
+[4,5,6,7]
+```
+
+```haskell
+Prelude> filter (<4) [1..10]
+[1,2,3]
+```
+
+
 ## Idempotent
 
 A function is idempotent if reapplying it to its result does not produce a different result.
@@ -412,14 +407,15 @@ Math.abs(Math.abs(10))
 sort(sort(sort([2, 1])))
 ```
 
-## Predicate
+## Предикат
 
-A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
+Функция, возвращающая значение правда или ложь. Обычно используется для фильтрации 
+последовательности значений по какому-либо свойству.
 
-```js
-const predicate = (a) => a > 2
-
-;[1, 2, 3, 4].filter(predicate) // [3, 4]
+```haskell
+Prelude> let predicate a = a < 3
+Prelude> filter predicate [1..10]
+[1,2]
 ```
 
 ## Type Signatures
@@ -453,8 +449,6 @@ const map = (f) => (list) => list.map(f)
 ```
 
 __Further reading__
-* [Ramda's type signatures](https://github.com/ramda/ramda/wiki/Type-Signatures)
-* [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch7.html#whats-your-type)
 * [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
 
 # 2. Общие понятия
@@ -477,18 +471,6 @@ referentially transparent.
 
 When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
 
-
-## Side effects
-
-A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
-
-```js
-const differentEveryTime = new Date()
-```
-
-```js
-console.log('IO is a side effect!')
-```
 
 ## Continuation
 
