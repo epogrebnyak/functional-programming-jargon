@@ -36,21 +36,20 @@ __Содержание__
   - [Closure](#closure)
   - [Partial Application](#partial-application)
   - [Currying](#currying)
-  - [Auto Currying](#auto-currying)
   - [Function Composition](#function-composition)
   - [Arity](#arity)
-  - [Continuation](#continuation)
   - [Purity](#purity)
   - [Point-Free Style](#point-free-style)
   - [Lambda](#lambda)
   - [Lambda Calculus](#lambda-calculus)
+  - [Idempotent](#idempotent)
+  - [Predicate](#predicate)
   - [Type Signatures](#type-signatures)
 - [2. Общие понятия](#2-Общие-понятия)
   - [Referential Transparency](#referential-transparency)
   - [Equational Reasoning](#equational-reasoning)
   - [Side effects](#side-effects)
-  - [Idempotent](#idempotent)
-  - [Predicate](#predicate)
+  - [Continuation](#continuation)
   - [Contracts](#contracts)
   - [Category](#category)
   - [Value](#value)
@@ -62,7 +61,7 @@ __Содержание__
     - [Тип-произведение (product type)](#Тип-произведение-product-type)
   - [Functor](#functor)
   - [Pointed Functor](#pointed-functor)
-  - [Lift](#lift)
+  - [Lifting](#lifting)
   - [Monoid](#monoid)
   - [Monad](#monad)
   - [Comonad](#comonad)
@@ -150,7 +149,8 @@ times(-1)(console.log)
 // RangeError: Maximum call stack size exceeded
 ```
 
-### Dealing with partial functions
+Dealing with partial functions 
+
 Partial functions are dangerous as they need to be treated with great caution. You might get an unexpected (wrong) result or run into runtime errors. Sometimes a partial function might not return at all. Being aware of and treating all these edge cases accordingly can become very tedious.
 Fortunately a partial function can be converted to a regular (or total) one. We can provide default values or use guards to deal with inputs for which the (previously) partial function is undefined. Utilizing the [`Option`](#Option) type, we can yield either `Some(value)` or `None` where we would otherwise have behaved unexpectedly:
 ```js
@@ -186,6 +186,7 @@ times(-1)(console.log)
 // won't execute anything
 ```
 Making your partial functions total ones, these kinds of runtime errors can be prevented. Always returning a value will also make for code that is both easier to maintain as well as to reason about.
+
 -->
 
 ## Функция высшего порядка (ФВП)
