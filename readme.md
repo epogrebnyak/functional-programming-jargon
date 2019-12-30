@@ -198,7 +198,7 @@ Making your partial functions total ones, these kinds of runtime errors can be p
 *Purity*
 
 Функция является чистой, если ее значение определяется только 
-значением аргумента и если она не производит побочных эффектов.
+значением аргумента и она не производит побочных эффектов.
 
 Все функции в языке Haskell являются чистыми. Настолько чистыми, что для того, 
 чтобы получить побочный эффект в виде записи на диск или вывода на экран надо 
@@ -216,7 +216,19 @@ const differentEveryTime = new Date()
 console.log('IO is a side effect!')
 ```
 
-## Closure
+## Замыкание
+
+*Closure*
+
+Замыкание - способ функции работы с 
+с аргументами вне своей области 
+определения. 
+
+Например, функции-конструктору других функций 
+передаются параметры этих функций...
+
+
+
 
 A closure is a way of accessing a variable outside its scope.
 Formally, a closure is a technique for implementing lexically scoped named binding. It is a way of storing a function with an environment.
