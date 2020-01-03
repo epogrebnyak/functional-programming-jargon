@@ -58,6 +58,7 @@ __Содержание__
   - [Constant](#constant)
   - [Lazy evaluation](#lazy-evaluation)
 - [3. Типы](#3-Типы)
+  - [Тип](#Тип)
   - [Алгебраический тип данных](#Алгебраический-тип-данных)
     - [Тип-сумма (sum type)](#Тип-сумма-sum-type)
     - [Тип-произведение (product type)](#Тип-произведение-product-type)
@@ -276,8 +277,6 @@ sum :: Num a => a -> a -> a
 -- Арность функции sum равна 2 
 ```
  
-
-
 ## Point-Free Style
 
 Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
@@ -549,6 +548,9 @@ randIter.next() // Each execution gives a random value, expression is evaluated 
 
 # 3. Типы
 
+## Тип
+
+...
 
 ## Алгебраический тип данных
 
