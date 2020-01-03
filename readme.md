@@ -12,16 +12,16 @@
 
 Что поменялось в переводе по сравнению с исходной статьей?
 
-- статьи сгруппированы по секциям
-- все примеры на языке Haskell <!-- - добавлены раздел "Cсылки" с русскоязычными и англоязычными ресурсами -->
-- про морфизмы - убрали [в отдельный файл](morphism.md) и не переводили
-- не проверяется соответствие терминологии на [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
-- изменения в отдельных статьях
+- статьи сгруппированы по секциям "Функции", "Общие понятия", "Типы"
+- все примеры на языке Haskell 
+- статьи про морфизмы - убрал [в отдельный файл](morphism.md) и не переводил
+- соответствие терминологии на [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)  не проверяется 
+- переработка в отдельных статей, в основном, из-за сильных отличий между JavaScript и Haskell
+- добавлены раздел "Cсылки" с русско- и англоязычными ресурсами
 
-Стиль изложения и требования к содержанию исходного глоссария изложены в [contributing.md](contributing.md). 
-Этот короткий чеклист по требованиям к изложению технического материала может быть полезен и в других проектах.
+Стиль изложения и требования к содержанию исходного глоссария изложены в [contributing.md](contributing.md). Этот чеклист по характеристикам технического материала может быть полезен и в других проектах.
 
-<!-- Перевод выполнен ..., reviewed by ...  -->
+Перевод выполнил Погребняк Евгений. <!--Комментарии, замечания и добавления: ... -->
 
 ## Введение <!-- omit in TOC -->
 
@@ -35,11 +35,11 @@ __Содержание__
   - [Чистота и побочные эффекты](#Чистота-и-побочные-эффекты)
     - [Чистота](#Чистота)
     - [Side effects](#side-effects)
-  - [Closure](#closure)
+  - [Замыкание](#Замыкание)
   - [Каррирование и частичное применение](#Каррирование-и-частичное-применение)
     - [Каррирование](#Каррирование)
     - [Частичное применение](#Частичное-применение)
-  - [Function Composition](#function-composition)
+  - [Композиция функций](#Композиция-функций)
   - [Арность функции](#Арность-функции)
   - [Point-Free Style](#point-free-style)
   - [Lambda](#lambda)
@@ -95,10 +95,9 @@ __Содержание__
 - детерминированными (каждому аргументу всегда соответствует одно и то же значение функции)
 - чистыми (вычисляют значение по аргументу и не производят никаких скрытых операций, приводящих к побочным эффектам).
 
-Результат функции полностью зависит только от аргумента, что делает функции независимыми от контекста, в котором они исполняются. <!--Это делает функции удобными для работы и переиспользования. -->
+Результат функции полностью зависит только от аргумента, что делает функции независимыми от контекста, в котором они исполняются. Это делает функции удобными для работы и переиспользования.
 
-*Примечание:* в обыденном понимании функцией может называться и та последовательность операций,которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть 5rft444444444t1процедурами, а не функциями.
-
+*Примечание:* в нестрогом понимании функцией может называться и та последовательность операций,которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Чтобы отличить их от функций в данном определении, такие операции правильнее называть процедурами.
 
 ## Частичная функция 
 
@@ -122,76 +121,6 @@ __Содержание__
 - различные проверки допустимости исходных значений.
 
 Подробнее см. например [здесь](https://wiki.haskell.org/Avoiding_partial_functions).
-
-<!--
-
-Partial functions add cognitive overhead, they are harder to reason about and can lead to runtime errors. Some examples:
-```js
-// example 1: sum of the list
-// sum :: [Number] -> Number
-const sum = arr => arr.reduce((a, b) => a + b)
-sum([1, 2, 3]) // 6
-sum([]) // TypeError: Reduce of empty array with no initial value
-
-// example 2: get the first item in list
-// first :: [A] -> A
-const first = a => a[0]
-first([42]) // 42
-first([]) // undefined
-//or even worse:
-first([[42]])[0] // 42
-first([])[0] // Uncaught TypeError: Cannot read property '0' of undefined
-
-// example 3: repeat function N times
-// times :: Number -> (Number -> Number) -> Number
-const times = n => fn => n && (fn(n), times(n - 1)(fn))
-times(3)(console.log)
-// 3
-// 2
-// 1
-times(-1)(console.log)
-// RangeError: Maximum call stack size exceeded
-```
-
-Dealing with partial functions 
-
-Partial functions are dangerous as they need to be treated with great caution. You might get an unexpected (wrong) result or run into runtime errors. Sometimes a partial function might not return at all. Being aware of and treating all these edge cases accordingly can become very tedious.
-Fortunately a partial function can be converted to a regular (or total) one. We can provide default values or use guards to deal with inputs for which the (previously) partial function is undefined. Utilizing the [`Option`](#Option) type, we can yield either `Some(value)` or `None` where we would otherwise have behaved unexpectedly:
-```js
-// example 1: sum of the list
-// we can provide default value so it will always return result
-// sum :: [Number] -> Number
-const sum = arr => arr.reduce((a, b) => a + b, 0)
-sum([1, 2, 3]) // 6
-sum([]) // 0
-
-// example 2: get the first item in list
-// change result to Option
-// first :: [A] -> Option A
-const first = a => a.length ? Some(a[0]) : None()
-first([42]).map(a => console.log(a)) // 42
-first([]).map(a => console.log(a)) // console.log won't execute at all
-//our previous worst case
-first([[42]]).map(a => console.log(a[0])) // 42
-first([]).map(a => console.log(a[0])) // won't execte, so we won't have error here
-// more of that, you will know by function return type (Option)
-// that you should use `.map` method to access the data and you will never forget
-// to check your input because such check become built-in into the function
-
-// example 3: repeat function N times
-// we should make function always terminate by changing conditions:
-// times :: Number -> (Number -> Number) -> Number
-const times = n => fn => n > 0 && (fn(n), times(n - 1)(fn))
-times(3)(console.log)
-// 3
-// 2
-// 1
-times(-1)(console.log)
-// won't execute anything
-```
-Making your partial functions total ones, these kinds of runtime errors can be prevented. Always returning a value will also make for code that is both easier to maintain as well as to reason about.
-
--->
 
 ## Чистота и побочные эффекты
 
@@ -218,35 +147,32 @@ const differentEveryTime = new Date()
 console.log('IO is a side effect!')
 ```
 
-## Closure
+## Замыкание 
 
-A closure is a way of accessing a variable outside its scope.
-Formally, a closure is a technique for implementing lexically scoped named binding. It is a way of storing a function with an environment.
+Closure
 
-A closure is a scope which captures local variables of a function for access even after the execution has moved out of the block in which it is defined.
-ie. they allow referencing a scope after the block in which the variables were declared has finished executing.
+Использование доступных для функции переменных, помимо непосредственно переданных ей аргументов.
 
+> Замыкание — это особый вид функции. Она определена в теле другой функции и создаётся каждый раз во время её выполнения. Синтаксически это выглядит как функция, находящаяся целиком в теле другой функции. При этом вложенная внутренняя функция содержит ссылки на локальные переменные внешней функции. Каждый раз при выполнении внешней функции происходит создание нового экземпляра внутренней функции, с новыми ссылками на переменные внешней функции. 
 
-```js
-const addTo = x => y => x + y;
-var addToFive = addTo(5);
-addToFive(3); //returns 8
+[Источник](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5))
+
+Поскольку Haskell основан на лямбда-исчислении (см.)
+замыкания используются в нем естественным образом и [не являются 
+чем-то особенным](https://stackoverflow.com/questions/9088295/closures-in-haskell).
+
+```haskell
+-- Вымученный пример замыкания на Haskell
+-- Переменная x не является аргументом лямбда-функции, 
+-- но доступна внутри тела функции f
+f x = (\y -> x + y)
+
+-- привычная запись на Haskell
+f x y = x + y
 ```
-The function ```addTo()``` returns a function(internally called ```add()```), lets store it in a variable called ```addToFive``` with a curried call having parameter 5.
 
-Ideally, when the function ```addTo``` finishes execution, its scope, with local variables add, x, y should not be accessible. But, it returns 8 on calling ```addToFive()```. This means that the state of the function ```addTo``` is saved even after the block of code has finished executing, otherwise there is no way of knowing that ```addTo``` was called as ```addTo(5)``` and the value of x was set to 5.
-
-Lexical scoping is the reason why it is able to find the values of x and add - the private variables of the parent which has finished executing. This value is called a Closure.
-
-The stack along with the lexical scope of the function is stored in form of reference to the parent. This prevents the closure and the underlying variables from being garbage collected(since there is at least one live reference to it).
-
-Lambda Vs Closure: A lambda is essentially a function that is defined inline rather than the standard method of declaring functions. Lambdas can frequently be passed around as objects.
-
-A closure is a function that encloses its surrounding state by referencing fields external to its body. The enclosed state remains across invocations of the closure.
-
-__Further reading/Sources__
-* [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
-* [JavaScript Closures highly voted discussion](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
+Добавление:
+- Функция-[комбинатор](https://wiki.haskell.org/Combinator), в отличие от замыкания, использует только переданные ей аргументы.
 
 ## Каррирование и частичное применение
 
@@ -266,7 +192,7 @@ Prelude> let sum (a, b) = a + b
 Prelude> let curriedSum = curry sum
 Prelude> curriedSum 40 2
 42
-``` 
+```
 
 В отличие от других языков программирования функции многих аргументов в Haskell каррированы по умолчанию. Это значит, что частичное применение доступно для всех функций многих аргументов
 и не требует специальных действий (см. ниже). 
@@ -299,15 +225,42 @@ Prelude> 9
 
 - [Partial application](https://wiki.haskell.org/Partial_application)
 
-## Function Composition
+## Композиция функций
 
-The act of putting two functions together to form a third function where the output of one function is the input of the other.
+Создание из двух функций `f(x)` и `g(x)` третьей функции `h`, результатом
+которой является применение функции `f` к `g(x)`: `h(x) = f(g(x))`.
 
-```js
-const compose = (f, g) => (a) => f(g(a)) // Definition
-const floorAndToString = compose((val) => val.toString(), Math.floor) // Usage
-floorAndToString(121.212121) // '121'
+В Haskell композиция функций производится оператором `.`. Такая запись 
+в point-free форме более лаконична, чем запись с аргументом функции:
+
+```haskell
+-- предположим, у нас определены две функции 
+-- со следующими подписями
+even :: Int -> Bool
+not :: Bool -> Bool
+
+-- давайте сдлаем новую функцию, которая проверяет 
+-- является ли значение нечетным
+myOdd :: Int -> Bool
+myOdd x = not (even x)
+
+-- или сделаем то же самое с использованием оператора .
+myOdd :: Int -> Bool
+myOdd = not . even
 ```
+
+[пример полностью](https://stackoverflow.com/questions/1475896/haskell-function-composition)
+
+
+```haskell
+-- функция desort создается путем комбинации 
+-- сортировки и применения обратного порядка списка
+desort = reverse . sort
+```
+
+[пример](https://wiki.haskell.org/Function_composition)
+
+См. также point-free style
 
 ## Арность функции
 
