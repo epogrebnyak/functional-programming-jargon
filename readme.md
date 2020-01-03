@@ -40,7 +40,7 @@ __Содержание__
     - [Каррирование](#Каррирование)
     - [Частичное применение](#Частичное-применение)
   - [Function Composition](#function-composition)
-  - [Arity](#arity)
+  - [Арность функции](#Арность-функции)
   - [Point-Free Style](#point-free-style)
   - [Lambda](#lambda)
   - [Lambda Calculus](#lambda-calculus)
@@ -72,6 +72,8 @@ __Содержание__
   - [Semigroup](#semigroup)
   - [Foldable](#foldable)
   - [Lens](#lens)
+- [Добавить](#Добавить)
+  - [Мощность множества](#Мощность-множества)
 
 # 1. Функции
 
@@ -95,7 +97,7 @@ __Содержание__
 
 Результат функции полностью зависит только от аргумента, что делает функции независимыми от контекста, в котором они исполняются. <!--Это делает функции удобными для работы и переиспользования. -->
 
-*Примечание:* в обыденном понимании функцией может называться и та последовательность операций,которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть процедурами, а не функциями.
+*Примечание:* в обыденном понимании функцией может называться и та последовательность операций,которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Такие операции правильнее называть 5rft444444444t1процедурами, а не функциями.
 
 
 ## Частичная функция 
@@ -198,7 +200,7 @@ Making your partial functions total ones, these kinds of runtime errors can be p
 *Purity*
 
 Функция является чистой, если ее значение определяется только 
-значением аргумента и она не производит побочных эффектов.
+значением аргумента и если она не производит побочных эффектов.
 
 Все функции в языке Haskell являются чистыми. Настолько чистыми, что для того, 
 чтобы получить побочный эффект в виде записи на диск или вывода на экран надо 
@@ -216,19 +218,7 @@ const differentEveryTime = new Date()
 console.log('IO is a side effect!')
 ```
 
-## Замыкание
-
-*Closure*
-
-Замыкание - способ функции работы с 
-с аргументами вне своей области 
-определения. 
-
-Например, функции-конструктору других функций 
-передаются параметры этих функций...
-
-
-
+## Closure
 
 A closure is a way of accessing a variable outside its scope.
 Formally, a closure is a technique for implementing lexically scoped named binding. It is a way of storing a function with an environment.
@@ -319,20 +309,20 @@ const floorAndToString = compose((val) => val.toString(), Math.floor) // Usage
 floorAndToString(121.212121) // '121'
 ```
 
-## Arity
+## Арность функции
 
-The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
+Arity (function)
 
-```js
-const sum = (a, b) => a + b
+Количество аргументов, которое принимает функция (унарная, бинарная и т.д.)
 
-const arity = sum.length
-console.log(arity) // 2
-
-// The arity of sum is 2
 ```
+Prelude> let sum a b = a + b
+Prelude> :t sum
+sum :: Num a => a -> a -> a
 
-
+-- Арность функции sum равна 2 
+```
+ 
 
 
 ## Point-Free Style
@@ -950,6 +940,19 @@ R.over(compose(firstLens, nameLens), uppercase, people) // [{'name': 'GERTRUDE B
 Other implementations:
 * [partial.lenses](https://github.com/calmm-js/partial.lenses) - Tasty syntax sugar and a lot of powerful features
 * [nanoscope](http://www.kovach.me/nanoscope/) - Fluent-interface
+
+# Добавить
+
+## Мощность множества
+
+Cardinality (set)
+
+Количество элементов конечного множества. 
+
+https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%89%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0
+
+Применительно к типам - см. Isomorphisms and Cardinalities в Thinking with Types: Type-Level Programming in Haskell by Sandy Maguire https://thinkingwithtypes.com/ 
+
 
 # Ссылки <!-- omit in TOC -->
 
