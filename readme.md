@@ -10,45 +10,72 @@
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
+Стиль изложения и требования к содержанию исходного глоссария изложены в [contributing.md](contributing.md). Этот яркий чеклист может быть полезен и в других образовательных проектах или, например, при разработке документации.
+
 Что поменялось в переводе по сравнению с исходной статьей?
 
-- статьи сгруппированы по секциям "Функции", "Общие понятия", "Типы"
-- все примеры на языке Haskell, многие из них заимствованы из [турецкой версии][tr] перевода
-- статьи про морфизмы - убрал [в отдельный файл](morphism.md) и не переводил
-- соответствие терминологии на [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)  не проверяется 
-- переработка в отдельных статей, в основном, из-за сильных отличий между JavaScript и Haskell
-- добавлены раздел "Cсылки" с русско- и англоязычными ресурсами
+__Организация материала__
 
-Стиль изложения и требования к содержанию исходного глоссария изложены в [contributing.md](contributing.md). Этот чеклист по характеристикам технического материала может быть полезен и в других проектах.
+Все статьи сгруппированы по секциям "Функции", "Общие понятия", "Типы". Внутри секций 
+также выделены подсекции с терминами, относящимися к одной теме. В некоторых случаях 
+даны  комментарии переводчика о логике секций и подсекций.
+
+__Язык программирования__
+
+Все примеры на языке Haskell, часть из них заимствована из [турецкой версии][tr] перевода
+  оригинальной статьи.
+
+__Где срезаны углы__
+
+Статьи про морфизмы я убрал [в отдельный файл](morphism.md) и не переводил. 
+Соответствие терминологии типов на [Fantasy Land spec](https://github.com/fantasyland/fantasy-land) не проверяется. Несколько статей я выбросил из перевода или сильно сократил, поскольку они, походе, интересны только со стороны JavaScript.
+
+__Добавления и изменения__
+
+Отдельные статьи переработаны, в основном, из-за сильных отличий между JavaScript и Haskell.
+На JavaScript можно продемонстрировать какие-то подходы к ФП, а Haskell и есть ФП.
+
+Из более основательных статей я добавил статьи *Функция* и *Тип*. 
+
+__Ссылки__
+
+В отдельных статьях добавлены ссылки на [глоссарий haskell.org][],
+полезные вопросы и ответы StackOverflow. В конце дан небольшой список литературы.
+
+Что можно сделать в этом словаре лучше? Конечно, это решать читателям. 
+Вы можете дать комментарий в issues этого проекта, или написать переводчику.
 
 Перевод выполнил Погребняк Евгений. <!--Комментарии, замечания и добавления: ... -->
 
 ## Введение <!-- omit in TOC -->
 
-Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
+У функционального программирования (ФП) есть много преимуществ, и как результат, его популярность растет. При этом у любой парадигмы программирования
+есть своя терминология и жаргон? и ФП - не исключение. С помощью этого словаря 
+мы надеемся упростить задачу изучения ФП. 
 
 __Содержание__
 
 - [1. Функции](#1-Функции)
   - [Функция](#Функция)
-  - [Частичная функция](#Частичная-функция)
-  - [Чистота и побочные эффекты](#Чистота-и-побочные-эффекты)
-    - [Чистота](#Чистота)
-    - [Side effects](#side-effects)
-  - [Замыкание](#Замыкание)
+  - [Type Signatures](#type-signatures)
+  - [Делаем с функциями что хотим](#Делаем-с-функциями-что-хотим)
+    - [Композиция функций](#Композиция-функций)
+    - [Point-Free Style](#point-free-style)
+    - [Lambda](#lambda)
+    - [Функция высшего порядка (ФВП)](#Функция-высшего-порядка-ФВП)
+  - [Не совсем &quot;правильные&quot; функции](#Не-совсем-quotправильныеquot-функции)
+    - [Частичная функция](#Частичная-функция)
+    - [Чистота и побочные эффекты](#Чистота-и-побочные-эффекты)
+      - [Чистота](#Чистота)
+      - [Side effects](#side-effects)
   - [Аргументы функции и их обработка](#Аргументы-функции-и-их-обработка)
     - [Арность функции](#Арность-функции)
     - [Каррирование](#Каррирование)
     - [Частичное применение](#Частичное-применение)
-  - [Композиция функций](#Композиция-функций)
-  - [Point-Free Style](#point-free-style)
-  - [Lambda](#lambda)
-  - [Lambda Calculus](#lambda-calculus)
-  - [Функция высшего порядка (ФВП)](#Функция-высшего-порядка-ФВП)
   - [Свойства и виды функций](#Свойства-и-виды-функций)
-    - [Idempotent](#idempotent)
+    - [Индемпотентность](#Индемпотентность)
     - [Предикат](#Предикат)
-  - [Type Signatures](#type-signatures)
+    - [Замыкание](#Замыкание)
 - [2. Общие понятия](#2-Общие-понятия)
   - [Referential Transparency](#referential-transparency)
   - [Equational Reasoning](#equational-reasoning)
@@ -58,8 +85,9 @@ __Содержание__
   - [Value](#value)
   - [Constant](#constant)
   - [Lazy evaluation](#lazy-evaluation)
+  - [Lambda Calculus](#lambda-calculus)
 - [3. Типы](#3-Типы)
-  - [Тип](#Тип)
+  - [Тип (данных)](#Тип-данных)
   - [Алгебраический тип данных](#Алгебраический-тип-данных)
     - [Тип-сумма (sum type)](#Тип-сумма-sum-type)
     - [Тип-произведение (product type)](#Тип-произведение-product-type)
@@ -101,7 +129,142 @@ __Содержание__
 
 *Примечание:* в нестрогом понимании функцией может называться и та последовательность операций,которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Чтобы отличить их от функций в данном определении, такие операции уместнее называть процедурами. 
 
-## Частичная функция 
+## Type Signatures
+
+Often functions in JavaScript will include comments that indicate the types of their arguments and return values.
+
+There's quite a bit of variance across the community but they often follow the following patterns:
+
+```js
+// functionName :: firstArgType -> secondArgType -> returnType
+
+// add :: Number -> Number -> Number
+const add = (x) => (y) => x + y
+
+// increment :: Number -> Number
+const increment = (x) => x + 1
+```
+
+If a function accepts another function as an argument it is wrapped in parentheses.
+
+```js
+// call :: (a -> b) -> a -> b
+const call = (f) => (x) => f(x)
+```
+
+The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type. The following version of `map` takes a function that transforms a value of some type `a` into another type `b`, an array of values of type `a`, and returns an array of values of type `b`.
+
+```js
+// map :: (a -> b) -> [a] -> [b]
+const map = (f) => (list) => list.map(f)
+```
+
+__Further reading__
+* [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
+
+
+## Делаем с функциями что хотим 
+
+### Композиция функций
+
+Создание из двух функций `f(x)` и `g(x)` третьей функции `h`, результатом
+которой является применение функции `f` к `g(x)`: `h(x) = f(g(x))`.
+
+В Haskell композиция функций производится оператором `.`. Такая запись 
+в point-free форме более лаконична, чем запись с аргументом:
+
+```haskell
+-- предположим, у нас определены две функции 
+-- со следующими подписями
+even :: Int -> Bool
+not :: Bool -> Bool
+
+-- давайте сдлаем новую функцию, которая проверяет 
+-- является ли значение нечетным
+myOdd :: Int -> Bool
+myOdd x = not (even x)
+
+-- или сделаем то же самое с использованием оператора .
+myOdd :: Int -> Bool
+myOdd = not . even
+```
+
+[пример полностью](https://stackoverflow.com/questions/1475896/haskell-function-composition)
+
+
+```haskell
+-- функция desort создается путем комбинации 
+-- сортировки и применения обратного порядка списка
+desort = reverse . sort
+```
+
+[пример](https://wiki.haskell.org/Function_composition)
+
+### Point-Free Style
+
+Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
+
+```js
+// Given
+const map = (fn) => (list) => list.map(fn)
+const add = (a) => (b) => a + b
+
+// Then
+
+// Not points-free - `numbers` is an explicit argument
+const incrementAll = (numbers) => map(add(1))(numbers)
+
+// Points-free - The list is an implicit argument
+const incrementAll2 = map(add(1))
+```
+
+`incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
+
+Points-free function definitions look just like normal assignments without `function` or `=>`.
+
+### Lambda
+
+An anonymous function that can be treated like a value.
+
+```js
+;(function (a) {
+  return a + 1
+})
+
+;(a) => a + 1
+```
+Lambdas are often passed as arguments to Higher-Order functions.
+
+```js
+;[1, 2].map((a) => a + 1) // [2, 3]
+```
+
+You can assign a lambda to a variable.
+
+```js
+const add1 = (a) => a + 1
+```
+
+### Функция высшего порядка (ФВП)
+
+Higher-Order Function (HOF)
+
+Функция, которая принимает другую функцию как аргумент и/или возвращает функцию как результат.
+
+```haskell
+Prelude> let add3 a = a + 3
+Prelude> map add3 [1..4]
+[4,5,6,7]
+```
+
+```haskell
+Prelude> filter (<4) [1..10]
+[1,2,3]
+```
+
+## Не совсем "правильные" функции 
+
+### Частичная функция 
 
 *Partial function*
 
@@ -124,9 +287,9 @@ __Содержание__
 
 Подробнее см. например [здесь](https://wiki.haskell.org/Avoiding_partial_functions).
 
-## Чистота и побочные эффекты
+### Чистота и побочные эффекты
 
-### Чистота 
+#### Чистота 
 
 *Purity*
 
@@ -137,7 +300,7 @@ __Содержание__
 чтобы получить побочный эффект в виде записи на диск или вывода на экран надо 
 еще постараться.
 
-### Side effects
+#### Side effects
 
 A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
 
@@ -148,35 +311,6 @@ const differentEveryTime = new Date()
 ```js
 console.log('IO is a side effect!')
 ```
-
-## Замыкание 
-
-*Closure*
-
-Использование доступных для функции переменных, помимо непосредственно переданных ей аргументов.
-
-> Замыкание — это особый вид функции. Она определена в теле другой функции и создаётся каждый раз во время её выполнения. Синтаксически это выглядит как функция, находящаяся целиком в теле другой функции. При этом вложенная внутренняя функция содержит ссылки на локальные переменные внешней функции. Каждый раз при выполнении внешней функции происходит создание нового экземпляра внутренней функции, с новыми ссылками на переменные внешней функции. 
-
-[Источник](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5))
-
-В других языках программирования замыкания играют важную роль, например,
-в функциях-конструктуорах, которые используют параметры для создания других функций.
-
-Поскольку Haskell основан на лямбда-исчислении (см.)
-замыкания используются в нем естественным образом и [не являются 
-чем-то особенным](https://stackoverflow.com/questions/9088295/closures-in-haskell).
-
-```haskell
--- Вымученный пример замыкания на Haskell
--- Переменная x не является аргументом лямбда-функции, 
--- но доступна внутри тела функции f
-f x = (\y -> x + y)
-
--- привычная запись на Haskell
-f x y = x + y
-```
-
-*Примечание:* Функция-[комбинатор](https://wiki.haskell.org/Combinator), в отличие от замыкания, использует только переданные ей аргументы.
 
 ## Аргументы функции и их обработка
 
@@ -248,116 +382,18 @@ Prelude> 9
 
 - [Partial application](https://wiki.haskell.org/Partial_application)
 
-## Композиция функций
-
-Создание из двух функций `f(x)` и `g(x)` третьей функции `h`, результатом
-которой является применение функции `f` к `g(x)`: `h(x) = f(g(x))`.
-
-В Haskell композиция функций производится оператором `.`. Такая запись 
-в point-free форме более лаконична, чем запись с аргументом функции:
-
-```haskell
--- предположим, у нас определены две функции 
--- со следующими подписями
-even :: Int -> Bool
-not :: Bool -> Bool
-
--- давайте сдлаем новую функцию, которая проверяет 
--- является ли значение нечетным
-myOdd :: Int -> Bool
-myOdd x = not (even x)
-
--- или сделаем то же самое с использованием оператора .
-myOdd :: Int -> Bool
-myOdd = not . even
-```
-
-[пример полностью](https://stackoverflow.com/questions/1475896/haskell-function-composition)
-
-
-```haskell
--- функция desort создается путем комбинации 
--- сортировки и применения обратного порядка списка
-desort = reverse . sort
-```
-
-[пример](https://wiki.haskell.org/Function_composition)
-
-См. также point-free style
 
  
-## Point-Free Style
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
-
-```js
-// Given
-const map = (fn) => (list) => list.map(fn)
-const add = (a) => (b) => a + b
-
-// Then
-
-// Not points-free - `numbers` is an explicit argument
-const incrementAll = (numbers) => map(add(1))(numbers)
-
-// Points-free - The list is an implicit argument
-const incrementAll2 = map(add(1))
-```
-
-`incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
-
-Points-free function definitions look just like normal assignments without `function` or `=>`.
-
-
-## Lambda
-
-An anonymous function that can be treated like a value.
-
-```js
-;(function (a) {
-  return a + 1
-})
-
-;(a) => a + 1
-```
-Lambdas are often passed as arguments to Higher-Order functions.
-
-```js
-;[1, 2].map((a) => a + 1) // [2, 3]
-```
-
-You can assign a lambda to a variable.
-
-```js
-const add1 = (a) => a + 1
-```
-
-## Lambda Calculus
-A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
-
-
-## Функция высшего порядка (ФВП)
-
-Higher-Order Function (HOF)
-
-Функция, которая принимает другую функцию как аргумент и/или возвращает функцию как результат.
-
-```haskell
-Prelude> let add3 a = a + 3
-Prelude> map add3 [1..4]
-[4,5,6,7]
-```
-
-```haskell
-Prelude> filter (<4) [1..10]
-[1,2,3]
-```
 
 ## Свойства и виды функций
 
-### Idempotent
+*Прим. переводчика:* термины, которые собрарны в этом разделе, не показались мне фундаментальынми или интересными. Если вы с ними сталкивались - здесь вы найдете
+краткое определение. Заучивать или сильно вникать в них, на мой взгляд, не нужно.
 
-A function is idempotent if reapplying it to its result does not produce a different result.
+### Индемпотентность
+
+Функция является идемпотентной, если ее повторное применение не влияет на результат:
 
 ```
 f(f(x)) ≍ f(x)
@@ -382,38 +418,36 @@ Prelude> filter predThree [1..10]
 [1,2]
 ```
 
-## Type Signatures
+### Замыкание 
 
-Often functions in JavaScript will include comments that indicate the types of their arguments and return values.
+*Closure*
 
-There's quite a bit of variance across the community but they often follow the following patterns:
+Использование доступных для функции переменных, помимо непосредственно переданных ей аргументов.
 
-```js
-// functionName :: firstArgType -> secondArgType -> returnType
+> Замыкание — это особый вид функции. Она определена в теле другой функции и создаётся каждый раз во время её выполнения. Синтаксически это выглядит как функция, находящаяся целиком в теле другой функции. При этом вложенная внутренняя функция содержит ссылки на локальные переменные внешней функции. Каждый раз при выполнении внешней функции происходит создание нового экземпляра внутренней функции, с новыми ссылками на переменные внешней функции. 
 
-// add :: Number -> Number -> Number
-const add = (x) => (y) => x + y
+[Источник](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5))
 
-// increment :: Number -> Number
-const increment = (x) => x + 1
+В других языках программирования замыкания играют важную роль, например,
+в функциях-конструктуорах, которые используют параметры для создания других функций.
+
+Поскольку Haskell основан на лямбда-исчислении (см.)
+замыкания используются в нем естественным образом и [не являются 
+чем-то особенным](https://stackoverflow.com/questions/9088295/closures-in-haskell).
+
+```haskell
+-- Вымученный пример замыкания на Haskell
+-- Переменная x не является аргументом лямбда-функции, 
+-- но доступна внутри тела функции f
+f x = (\y -> x + y)
+
+-- привычная запись на Haskell
+f x y = x + y
 ```
 
-If a function accepts another function as an argument it is wrapped in parentheses.
+*Примечание:* Функция-[комбинатор](https://wiki.haskell.org/Combinator), в отличие от замыкания, использует только переданные ей аргументы.
 
-```js
-// call :: (a -> b) -> a -> b
-const call = (f) => (x) => f(x)
-```
 
-The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type. The following version of `map` takes a function that transforms a value of some type `a` into another type `b`, an array of values of type `a`, and returns an array of values of type `b`.
-
-```js
-// map :: (a -> b) -> [a] -> [b]
-const map = (f) => (list) => list.map(f)
-```
-
-__Further reading__
-* [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
 
 # 2. Общие понятия
 
@@ -555,12 +589,35 @@ const randIter = rand()
 randIter.next() // Each execution gives a random value, expression is evaluated on need.
 ```
 
+## Lambda Calculus
+A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
 
 # 3. Типы
 
-## Тип
+## Тип (данных)
 
-...
+Тип представляет собой набор возможных значений. Например, у типа `Bool` есть 
+два значения `True` и `False`. Тип `Int` включает в себя все целочисленные значения.
+
+Типы бывают простые и составные. Например, мы можем создать новый составной тип данных  
+`Point` объвив, что он состоит из двух значений типа `Float`. 
+
+```haskell 
+data Point = Point Float Float
+```
+
+О составных типах данных см. подробнее *алгебраические типы данных*.
+
+Термины _тип_ и _тип данных_ взаимозаменяемы. 
+
+В функциональном программировании типы позволяют точно описывать с какими значениями
+ работают функции. Использование типов дает повышенные гарантии корректности программ. 
+Например, получив значение непредусмотренного для функции типа компилятор 
+выдаст сообщение об ошибке. 
+
+Ссылки:
+- https://stackoverflow.com/questions/51509949/what-do-haskell-data-constructors-construct
+
 
 ## Алгебраический тип данных
 
