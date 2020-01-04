@@ -966,6 +966,7 @@ Other implementations:
 * [nanoscope](http://www.kovach.me/nanoscope/) - Fluent-interface
 
 <!--
+
 # Добавить
 
 ## Мощность множества
