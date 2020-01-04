@@ -56,7 +56,7 @@ __Содержание__
 - [Введение](#Введение)
 - [1. Функции](#1-Функции)
   - [Функция](#Функция)
-  - [Type Signatures](#type-signatures)
+  - [Аннотация типа](#Аннотация-типа)
   - [Делаем с функциями, что хотим](#Делаем-с-функциями-что-хотим)
     - [Композиция функций](#Композиция-функций)
     - [Point-Free Style](#point-free-style)
@@ -135,38 +135,37 @@ __Содержание__
 
 *Примечание:* в программировании функцией может называться и та последовательность операций, которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Чтобы отличить их от функций в данном определении, такие операции можно называть процедурами. 
 
-## Type Signatures
+## Аннотация типа
 
-Often functions in JavaScript will include comments that indicate the types of their arguments and return values.
+*Type signatures*
 
-There's quite a bit of variance across the community but they often follow the following patterns:
+Подпись, или аннотация, типа - это строка, которая показывает тип переменной. 
 
-```js
-// functionName :: firstArgType -> secondArgType -> returnType
 
-// add :: Number -> Number -> Number
-const add = (x) => (y) => x + y
+В Haskell подпись типа может задаваться напрямую в коде, например, таким образом:
 
-// increment :: Number -> Number
-const increment = (x) => x + 1
+```
+inc :: Int -> Int
 ```
 
-If a function accepts another function as an argument it is wrapped in parentheses.
+В этом случае функция `inc` будет принимать значение типа `Int` и выдавать результат
+типа `Int`. 
 
-```js
-// call :: (a -> b) -> a -> b
-const call = (f) => (x) => f(x)
+
+В отсутствие подписи типа компилятор сам выводит наболее общий вид подписи типа, исходя из того как переменная используется в программе. 
+
+```haskell
+Prelude> inc x = x + 1
+Prelude> :t inc
+inc :: Num a => a -> a
 ```
+Подпись типа, выведенная в примере выше компилятором, говорит о том, 
+что имя `inc` - это функция, которая принимает значение типа `а` и 
+выдает значение типа `a`, при этом сам тип `а` - принадлежит классу 
+типов `Num`, который объединяет типы, выражающие числа.
 
-The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type. The following version of `map` takes a function that transforms a value of some type `a` into another type `b`, an array of values of type `a`, and returns an array of values of type `b`.
-
-```js
-// map :: (a -> b) -> [a] -> [b]
-const map = (f) => (list) => list.map(f)
-```
-
-__Further reading__
-* [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
+В других языках программирования аннотации типов могут 
+иметь справочную функцию, и не проверяться компилятором. 
 
 
 ## Делаем с функциями, что хотим 
@@ -392,12 +391,15 @@ Prelude> 9
 
 ## Свойства и виды функций
 
-*Прим. переводчика:* термины, которые собраны в этом разделе, не показались мне фундаментальынми или интересными. Если вы с ними сталкивались - здесь вы найдете
-краткое определение. Заучивать или сильно вникать в них, на мой взгляд, не нужно.
+*Прим. переводчика:* термины, которые собраны в этом разделе, не показались мне фундаментальными или интересными. Здесь вы найдете их краткое определение, но 
+заучивать или сильно вникать в них, на мой взгляд, не нужно.
 
 ### Индемпотентность
 
-Функция является идемпотентной, если ее повторное применение не влияет на результат:
+*Indepotent*
+
+Функция является идемпотентной, если ее повторное применение не влияет на 
+исходный результат:
 
 ```
 f(f(x)) ≍ f(x)
@@ -611,17 +613,23 @@ A branch of mathematics that uses functions to create a [universal model of comp
 data Point = Point Float Float
 ```
 
-О составных типах данных см. подробнее *алгебраические типы данных*.
-
 Термины _тип_ и _тип данных_ взаимозаменяемы. 
 
 В функциональном программировании типы позволяют точно описывать с какими значениями
- работают функции. Использование типов дает повышенные гарантии корректности программ. 
+работают функции. Использование типов дает повышенные гарантии корректности программ. 
 Например, получив значение непредусмотренного для функции типа компилятор 
 выдаст сообщение об ошибке. 
 
+Цитата:
+
+> ... why we should care about types at all: what are they even for? At the lowest level, a computer is concerned with bytes, with barely any additional structure. What a type system gives us is abstraction. A type adds meaning to plain bytes: it lets us say “these bytes are text”, “those bytes are an airline reservation”, and so on. Usually, a type system goes beyond this to prevent us from accidentally mixing types up: for example, a type system usually won't let us treat a hotel reservation as a car rental receipt.
+
+[источник](http://book.realworldhaskell.org/read/types-and-functions.html)
+
+
 Ссылки:
 - https://stackoverflow.com/questions/51509949/what-do-haskell-data-constructors-construct
+- [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
 
 
 ## Алгебраический тип данных
