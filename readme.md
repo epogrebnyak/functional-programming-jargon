@@ -526,8 +526,10 @@ const randIter = rand()
 randIter.next() // Each execution gives a random value, expression is evaluated on need.
 ```
 
+<!-- 
 ## Lambda Calculus
 A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
+-->
 
 # 3. Типы
 
