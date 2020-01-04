@@ -965,6 +965,7 @@ Other implementations:
 * [partial.lenses](https://github.com/calmm-js/partial.lenses) - Tasty syntax sugar and a lot of powerful features
 * [nanoscope](http://www.kovach.me/nanoscope/) - Fluent-interface
 
+<!--
 # Добавить
 
 ## Мощность множества
@@ -977,6 +978,7 @@ https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%89%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%
 
 Применительно к типам - см. Isomorphisms and Cardinalities в Thinking with Types: Type-Level Programming in Haskell by Sandy Maguire https://thinkingwithtypes.com/ 
 
+-->
 
 # Ссылки <!-- omit in TOC -->
 
