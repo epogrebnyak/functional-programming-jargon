@@ -64,7 +64,7 @@ __Кто переводил <!--и помогал -->__
   - [Аннотация типа](#Аннотация-типа)
   - [Делаем с функциями, что хотим](#Делаем-с-функциями-что-хотим)
     - [Композиция функций](#Композиция-функций)
-    - [Point-Free Style](#point-free-style)
+    - [Point-free стиль записи](#point-free-стиль-записи)
     - [Лямбда-функция](#Лямбда-функция)
     - [Функция высшего порядка (ФВП)](#Функция-высшего-порядка-ФВП)
   - [Не совсем &quot;правильные&quot; функции](#Не-совсем-quotправильныеquot-функции)
@@ -201,34 +201,39 @@ myOdd = not . even
 
 
 ```haskell
--- функция desort создается путем комбинации 
--- сортировки и применения обратного порядка списка
+-- Функция desort создается путем комбинации 
+-- сортировки и перечисления списка в обратном порядке
 desort = reverse . sort
 ```
 
 [пример](https://wiki.haskell.org/Function_composition)
 
-### Point-Free Style
+### Point-free стиль записи
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
+Способ описать функции таким образом, чтобы не использовать 
+в явном виде аргументы функции. Например, многие функции могут 
+быть представлены как комбинация других функций. 
 
-```js
-// Given
-const map = (fn) => (list) => list.map(fn)
-const add = (a) => (b) => a + b
+Сравните, например:
 
-// Then
-
-// Not points-free - `numbers` is an explicit argument
-const incrementAll = (numbers) => map(add(1))(numbers)
-
-// Points-free - The list is an implicit argument
-const incrementAll2 = map(add(1))
+```haskell
+sum = foldr (+) 0
 ```
 
-`incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
+и
 
-Points-free function definitions look just like normal assignments without `function` or `=>`.
+```haskell
+sum' xs = foldr (+) 0 xs
+```
+
+Обе фукнции выполняют одно и то же действие суммирования, однако 
+запись в point-free стиле считается более лаконичной и может содержать 
+меньше ошибок. Однако запись более сложных функций в point-free стиле
+повышает сложность их восприятия и понимания логики вычислений.
+
+*Ссылки:*
+
+- [Point-free](https://wiki.haskell.org/Pointfree)
 
 ### Лямбда-функция
 
