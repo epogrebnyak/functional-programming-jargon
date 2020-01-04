@@ -455,23 +455,6 @@ readFileAsync('path/to/file', (err, response) => {
 })
 ```
 
-## Contracts
-
-A contract specifies the obligations and guarantees of the behavior from a function or expression at runtime. This acts as a set of rules that are expected from the input and output of a function or expression, and errors are generally reported whenever a contract is violated.
-
-```js
-// Define our contract : int -> boolean
-const contract = (input) => {
-  if (typeof input === 'number') return true
-  throw new Error('Contract violated: expected int -> boolean')
-}
-
-const addOne = (num) => contract(num) && num + 1
-
-addOne(2) // 3
-addOne('some string') // Contract violated: expected int -> boolean
-```
-
 ## Category
 
 A category in category theory is a collection of objects and morphisms between them. In programming, typically types
@@ -491,7 +474,7 @@ To be a valid category 3 rules must be met:
 
 Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
 
-__Further reading__
+__Ссылки__
 
 * [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 
