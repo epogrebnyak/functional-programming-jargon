@@ -844,9 +844,7 @@ __Ссылки__
 
 Примеры выражений: `2+3`, `fst (1+2, 3+4)`, `fmap (+1) (Just 5)`.
 
-__Ссылки__: 
-
-- [![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-ex]
+[![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-ex]
 
 [w-ex]:
 https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)
@@ -886,6 +884,7 @@ Prelude> take 5 lst0
 - <https://wiki.haskell.org/Category:Glossary>
 
 ## Книги и сайты на русском языке
+
 - <https://anton-k.github.io/ru-haskell-book/book/home.html>
 - <https://www.ibm.com/developerworks/ru/library/l-haskell2/index.html>
 - <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
