@@ -138,7 +138,7 @@ sum' xs = foldr (+) 0 xs
 меньше ошибок. Однако запись более сложных функций в point-free стиле
 может затруднять понимание логики вычислений.
 
-Point-free стиль на русском также называется *бесточечный стиль*.
+Point-free стиль также называется *бесточечный стиль*.
 
 [![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Pointfree)
 
@@ -400,8 +400,7 @@ inc :: Num a => a -> a
 Тип представляет собой набор возможных значений. Например, у типа `Bool` есть 
 два значения `True` и `False`. Тип `Int` включает в себя все целочисленные значения.
 
-Типы бывают простые и составные. Например, мы можем создать новый составной тип данных  
-`Point` объвив, что он состоит из двух значений типа `Float`. 
+Типы бывают простые и составные. Например, мы можем создать новый составной тип данных `Point`,объявив, что он состоит из двух значений типа `Float`.
 
 ```haskell 
 data Point = Point Float Float
@@ -414,11 +413,9 @@ data Point = Point Float Float
 Например, получив значение непредусмотренного для функции типа компилятор 
 выдаст сообщение об ошибке.
 
-Цитата:
+Цитата ([источник](http://book.realworldhaskell.org/read/types-and-functions.html)):
 
 > ... why we should care about types at all: what are they even for? At the lowest level, a computer is concerned with bytes, with barely any additional structure. What a type system gives us is abstraction. A type adds meaning to plain bytes: it lets us say “these bytes are text”, “those bytes are an airline reservation”, and so on. Usually, a type system goes beyond this to prevent us from accidentally mixing types up: for example, a type system usually won't let us treat a hotel reservation as a car rental receipt.
-
-[источник](http://book.realworldhaskell.org/read/types-and-functions.html)
 
 __Ссылки__
 
