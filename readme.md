@@ -1,9 +1,9 @@
-> This is an abridged and modified Russian draft translation of [Functional Programming Jargon][en] with examples in Haskell. Some code examples borrowed from [Turkish translation][tr].
+> This is an abridged and modified Russian translation of [Functional Programming Jargon][en] with examples in Haskell. Some code examples borrowed from [Turkish translation][tr].
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
-> Эта статья - draft сокращенного [перевода и переработки](translation.md) публикации [Functional Programming Jargon][en] с примерами на Нaskell, часть из которых взята из [турецкой
+> Эта статья - сокращенный [перевод и переработка](translation.md) публикации [Functional Programming Jargon][en] с примерами на Нaskell, часть из которых взята из [турецкой
 версии статьи][tr]. Перевод оригинальной статьи с примерами на JavaScript выполнен [здесь](https://habr.com/ru/post/310172).
 
 # Словарь сленга функционального программирования
