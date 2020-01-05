@@ -143,6 +143,8 @@ Point-free стиль также называется *бесточечный с
 
 *Lambda*
 
+[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Anonymous_function)
+
 Неименованная, анонимная функция. 
 
 ```haskell
@@ -161,11 +163,13 @@ Prelude> map (\x -> x + 1) [1..4]
 __Примечание:__ в лямбда-исчислении, лежащем в основе функционального программирования,
 способ определить функцию называется абстракция, или ["лямбда-абстракция"](https://wiki.haskell.org/Lambda_abstraction). Это более строгий термин, чем более распространенные  *"лямбда"* или *"лямбда-функция"*.
 
-[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Lambda_abstraction) [![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Anonymous_function)
-
 ### Лямбда-исчисление
 
 *Lambda calculus*
+
+[![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-lc]
+
+[w-lc]: https://ru.wikipedia.org/wiki/%D0%9B%D1%8F%D0%BC%D0%B1%D0%B4%D0%B0-%D0%B8%D1%81%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5
 
 Раздел математики, в котором формализовано и анализируется понятие вычислимости.
 
@@ -178,18 +182,14 @@ __Примечание:__ в лямбда-исчислении, лежащем �
 __Ccылки (англ.яз.)__
 
 1. [Raul Rojas. A Tutorial Introduction to the Lambda Calculus][rr]
-2. [Lambda Calculus](https://crypto.stanford.edu/~blynn/lambda)
+2. [Ben Lynn. Lambda Calculus](https://crypto.stanford.edu/~blynn/lambda)
 
 [rr]: https://www.inf.fu-berlin.de/lehre/WS03/alpi/lambda.pdf
 
 __Ccылки (рус.яз.)__
 
-3. [Функциональное программирование. Лекция 1. Лямбда-исчисление](http://mit.spbau.ru/sewiki/images/0/09/Fpc01_170905.pdf)
-4. [Лямбда-исчисление](https://anton-k.github.io/ru-haskell-book/book/14.html)
-
-[![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-lc]
-
-[w-lc]: https://ru.wikipedia.org/wiki/%D0%9B%D1%8F%D0%BC%D0%B1%D0%B4%D0%B0-%D0%B8%D1%81%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5
+3. [Денис Москвин. Лямбда-исчисление](http://mit.spbau.ru/sewiki/images/0/09/Fpc01_170905.pdf)
+4. [Антон Холомьёв. Лямбда-исчисление](https://anton-k.github.io/ru-haskell-book/book/14.html)
 
 ### Функция высшего порядка (ФВП)
 
