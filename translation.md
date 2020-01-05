@@ -1,3 +1,5 @@
+[tr]: https://github.com/mrtkp9993/functional-programming-jargon
+
 # Что поменялось в переводе по сравнению с исходной статьей?
 
 __Организация материала__
