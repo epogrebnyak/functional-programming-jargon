@@ -798,13 +798,13 @@ __Ссылки__:
 истина о состоянии системы может быть определена из составных частей программы.
 
 Упорощенно, эквациональное рассуждение это процесс интерпретации или доказательства 
-свойств кода программы путем подстановки равных выражений.
+свойств программы путем подстановки равных выражений.
+
+*Примечание:* перевод термина дан по [справочнику ruhaskell](https://github.com/ruHaskell/ruhaskell/wiki/Translation), но привычнее в английском написании.
 
 __Ссылки__: 
 
 - [Haskell for all - Equational reasoning](http://www.haskellforall.com/2013/12/equational-reasoning.html)
-
-*Примечание:* перевод термина дан по [справочнику ruhaskell](https://github.com/ruHaskell/ruhaskell/wiki/Translation), часто используется в английском написании без перевода.
 
 <!--
 ## Category
@@ -843,7 +843,7 @@ __Ссылки__
 
 [![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-ex]
 
-[w-ex]:
+[w-ex]: 
 https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)
 
 ## Значение
