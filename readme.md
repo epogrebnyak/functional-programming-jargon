@@ -896,4 +896,4 @@ Prelude> take 5 lst0
 # Развитие словаря
 
 Что можно сделать в этом словаре лучше? Конечно, это решать читателям. 
-Вы можете дать комментарий в [issues этого проекта](https://github.com/epogrebnyak/functional-programming-jargon/issues), или [написать переводчику](https://epogrebnyak.github.io/#contact).
+Вы можете дать комментарий в [issues этого проекта](https://github.com/epogrebnyak/functional-programming-jargon/issues), или [написать переводчику](https://twitter.com/PogrebnyakE).
