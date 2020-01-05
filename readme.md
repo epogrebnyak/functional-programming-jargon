@@ -48,6 +48,7 @@ __Содержание__
   * [Другие англоязычные словари и глоссарии](#другие-англоязычные-словари-и-глоссарии)
   * [Книги и сайты на русском языке](#книги-и-сайты-на-русском-языке)
 
+
 # 1. Функции
 
 <!--
@@ -108,7 +109,7 @@ myOdd = not . even
 desort = reverse . sort
 ```
 
-[пример](https://wiki.haskell.org/Function_composition)
+[источник](https://wiki.haskell.org/Function_composition)
 
 ### Point-free стиль записи
 
@@ -116,7 +117,6 @@ desort = reverse . sort
 
 Способ описать функцию без обозначения ее аргументов в явном виде. 
 
-Например, многие функции могут быть представлены как комбинация других функций. 
 
 Сравните:
 
@@ -132,7 +132,9 @@ sum' xs = foldr (+) 0 xs
 
 Обе фукнции выполняют одно и то же действие суммирования, однако 
 запись в point-free стиле считается более лаконичной и может содержать 
-меньше ошибок. Однако запись более сложных функций в point-free стиле
+меньше ошибок. 
+
+Однако запись более сложных функций в point-free стиле
 может затруднять понимание логики вычислений.
 
 *Ссылки:*
@@ -211,9 +213,13 @@ Prelude> filter (<4) [1..10]
 чтобы получить побочный эффект в виде записи на диск или вывода на экран надо 
 еще постараться.
 
-#### Side effects
+#### Побочные эффекты
 
-A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
+*Side effects*
+
+У функции или выражения есть побочный эффект помимо вычисления значения, если она взаимодействует (осуществляет чтение или запись) во внешние изменяемое состояние.  
+
+Таких фукнций на Haskell нет, примеры на JavaScript: 
 
 ```js
 const differentEveryTime = new Date()
@@ -841,7 +847,7 @@ https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D
 2) Все, что можно присвоить переменной.
 
 
-## Ленивые вычисления
+## Ленивые вычисления*
 
 Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. 
 
@@ -860,11 +866,6 @@ const randIter = rand()
 randIter.next() // Each execution gives a random value, expression is evaluated on need.
 ```
 
-<!-- 
-## Lambda Calculus
-A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
--->
-
 # Ссылки
 
 ## Другие англоязычные словари и глоссарии
@@ -879,7 +880,6 @@ A branch of mathematics that uses functions to create a [universal model of comp
 - <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
 - <https://www.ohaskell.guide>
 - <https://ruhaskell.org>
-
 
 __Развитие словаря__
 
