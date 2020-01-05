@@ -238,7 +238,7 @@ console.log('IO is a side effect!')
 
 Количество аргументов, которое принимает функция (унарная, бинарная и т.д.)
 
-```
+```haskell
 Prelude> let sum a b = a + b
 Prelude> :t sum
 sum :: Num a => a -> a -> a
@@ -459,7 +459,7 @@ data Move = Stop | Ahead Int | Back Int
 
 Шаги робота теперь можно описать с помощью списка типа `[Move]`, например, `[Ahead 1, Stop, Stop, Back -2]` (шаг вперед, два назад).
 
-Типы `Maybe` и `Either`,  использующиеся в языке Хаскелл для управлениями ситуациями с нежелательными результатами вычислений, также являются типами-суммой. В некоторых других функциональных языках программирования - это тип `Option`.
+Типы `Maybe` и `Either`, использующиеся для управлениями эффектами  вычислений, также являются типами-суммой. <!-- Добавить ссылки на определния. -->
 
 ### Тип-произведение (product type)
 
@@ -481,7 +481,7 @@ data Position = Position Float Float
 Position 1.5 2.8
 ```
 
-__Дополнения__:
+__Ссылки__:
 
 - [Теория множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
 - [Бывают ли алгебраические типы данных вне типа-суммы и произведения?](https://stackoverflow.com/questions/59509294/are-there-algebraic-data-types-outside-of-sum-and-product)
@@ -784,7 +784,7 @@ Other implementations:
 
 Cсылочная прозрачность упрощает понимание и изменение кода программ.
 
-__Подробнее__: 
+__Ссылки__: 
 
 - [Cсылочная прозрачность - Википедия](https://ru.wikipedia.org/wiki/%D0%A1%D1%81%D1%8B%D0%BB%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B7%D1%80%D0%B0%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C)
 - [Referential Transparency - UseNet](http://www.cas.mcmaster.ca/~kahl/reftrans.html)
@@ -797,7 +797,7 @@ __Подробнее__:
 Упорощенно, эквациональное рассуждение это процесс интерпретации или доказательства 
 свойств кода программы путем подстановки равных выражений.
 
-__Подробнее__: 
+__Ссылки__: 
 [Haskell for all - Equational reasoning](http://www.haskellforall.com/2013/12/equational-reasoning.html)
 
 *Примечание:* перевод термина дан по [справочнику ruhaskell](https://github.com/ruHaskell/ruhaskell/wiki/Translation), часто используется в английском написании без перевода.
@@ -837,7 +837,7 @@ __Ссылки__
 
 Примеры выражений: `2+3`, `fst (1+2, 3+4)`, `fmap (+1) (Just 5)`.
 
-__Подробнее__: 
+__Ссылки__: 
 https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)
 
 ## Значение
@@ -866,8 +866,7 @@ Prelude> take 5 lst0
 [1,2,3,4,5]
 ```
 
-
-# Ссылки
+# Литература
 
 ## Другие англоязычные словари и глоссарии
 
@@ -882,7 +881,8 @@ Prelude> take 5 lst0
 - <https://www.ohaskell.guide>
 - <https://ruhaskell.org>
 
-__Развитие словаря__
+
+# Развитие словаря
 
 Что можно сделать в этом словаре лучше? Конечно, это решать читателям. 
 Вы можете дать комментарий в [issues этого проекта](https://github.com/epogrebnyak/functional-programming-jargon/issues), или [написать переводчику](https://epogrebnyak.github.io/#contact).
