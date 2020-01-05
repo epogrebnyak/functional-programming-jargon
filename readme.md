@@ -138,7 +138,7 @@ sum' xs = foldr (+) 0 xs
 
 Point-free стиль на русском также называется *бесточечный стиль*.
 
-*Ссылки:*
+__Ссылки__
 
 - [Point-free](https://wiki.haskell.org/Pointfree)
 
@@ -788,8 +788,12 @@ Cсылочная прозрачность упрощает понимание �
 
 __Ссылки__: 
 
-- [Cсылочная прозрачность - Википедия](https://ru.wikipedia.org/wiki/%D0%A1%D1%81%D1%8B%D0%BB%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B7%D1%80%D0%B0%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C)
+- [![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-rt]
 - [Referential Transparency - UseNet](http://www.cas.mcmaster.ca/~kahl/reftrans.html)
+
+
+[w-rt]: https://ru.wikipedia.org/wiki/%D0%A1%D1%81%D1%8B%D0%BB%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B7%D1%80%D0%B0%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C
+
 
 ## Эквациональное рассуждение (equational reasoning)
 
@@ -800,7 +804,8 @@ __Ссылки__:
 свойств кода программы путем подстановки равных выражений.
 
 __Ссылки__: 
-[Haskell for all - Equational reasoning](http://www.haskellforall.com/2013/12/equational-reasoning.html)
+
+- [Haskell for all - Equational reasoning](http://www.haskellforall.com/2013/12/equational-reasoning.html)
 
 *Примечание:* перевод термина дан по [справочнику ruhaskell](https://github.com/ruHaskell/ruhaskell/wiki/Translation), часто используется в английском написании без перевода.
 
