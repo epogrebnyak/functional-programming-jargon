@@ -911,7 +911,7 @@ Prelude> take 5 xs
 ## Книги и сайты на русском языке
 
 - <https://anton-k.github.io/ru-haskell-book/book/home.html>
-- <https://www.ibm.com/developerworks/ru/library/l-haskell2/index.html>
+- <https://www.ibm.com/developerworks/ru/library/l-haskell/index.html?ca=drs->
 - <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
 - <https://www.ohaskell.guide>
 - <https://ruhaskell.org>
@@ -920,4 +920,4 @@ Prelude> take 5 xs
 # Развитие словаря
 
 Что можно сделать в этом словаре лучше? Конечно, это решать читателям. 
-Вы можете дать комментарий в [issues этого проекта](https://github.com/epogrebnyak/functional-programming-jargon/issues), или [написать переводчику](https://twitter.com/PogrebnyakE).
+Вы можете дать комментарий в [issues этого проекта](https://github.com/epogrebnyak/functional-programming-jargon/issues), или [написать переводчику](https://twitter.com/PogrebnyakE/status/1213719968925310976).
