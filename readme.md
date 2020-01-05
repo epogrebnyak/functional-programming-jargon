@@ -1,15 +1,14 @@
-> This is a Russian translation of [Functional Programming Jargon][en] with some additional editing and examples in Haskell.
+> This is an abridged and modified Russian translation of [Functional Programming Jargon][en] with examples in Haskell.
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
-> Эта статья - перевод и переработка публикации [Functional Programming Jargon][en] c
-с примерами на Нaskell. Комментарии переводчика приведены [тут](translation.md). В оригинальной статье примеры на JavaScript, она переведена на русский [здесь](https://habr.com/ru/post/310172).
+
+> Эта статья - сокращенный [перевод и переработка](translation.md) публикации [Functional Programming Jargon][en] с примерами на Нaskell. Перевод оригинальной статьи с примерами на JavaScript выполнен [здесь](https://habr.com/ru/post/310172).
 
 # Словарь сленга функционального программирования
 
-У функционального программирования (ФП) есть много преимуществ, и как результат, его популярность растет. При этом у любой парадигмы программирования
-есть своя терминология и жаргон, и ФП - не исключение. С помощью этого словаря 
+У функционального программирования (ФП) есть много преимуществ, и как результат, его популярность растет. При этом у любой парадигмы программирования есть своя терминология и жаргон, и ФП - не исключение. С помощью этого словаря 
 мы надеемся упростить задачу изучения ФП. 
 
 __Содержание__
@@ -39,17 +38,6 @@ __Содержание__
   * [Алгебраический тип данных](#алгебраический-тип-данных)
     * [Тип-сумма (sum type)](#тип-сумма-sum-type)
     * [Тип-произведение (product type)](#тип-произведение-product-type)
-  * [Functor](#functor)
-  * [Pointed Functor](#pointed-functor)
-  * [Lifting](#lifting)
-  * [Monoid](#monoid)
-  * [Monad](#monad)
-  * [Comonad](#comonad)
-  * [Applicative Functor](#applicative-functor)
-  * [Setoid](#setoid)
-  * [Semigroup](#semigroup)
-  * [Foldable](#foldable)
-  * [Lens](#lens)
 * [3. Общие понятия](#3-общие-понятия)
   * [Cсылочная прозрачность (referential transparency)](#cсылочная-прозрачность-referential-transparency)
   * [Эквациональное рассуждение (equational reasoning)](#эквациональное-рассуждение-equational-reasoning)
@@ -126,11 +114,11 @@ desort = reverse . sort
 
 *Point-free style*
 
-Способ описать функции таким образом, чтобы не использовать 
-в явном виде аргументы функции. Например, многие функции могут 
-быть представлены как комбинация других функций. 
+Способ описать функцию без обозначения ее аргументов в явном виде. 
 
-Сравните, например:
+Например, многие функции могут быть представлены как комбинация других функций. 
+
+Сравните:
 
 ```haskell
 sum = foldr (+) 0
@@ -145,7 +133,7 @@ sum' xs = foldr (+) 0 xs
 Обе фукнции выполняют одно и то же действие суммирования, однако 
 запись в point-free стиле считается более лаконичной и может содержать 
 меньше ошибок. Однако запись более сложных функций в point-free стиле
-затрудняет их восприятие и понимание логики вычислений.
+может затруднять понимание логики вычислений.
 
 *Ссылки:*
 
@@ -161,7 +149,7 @@ sum' xs = foldr (+) 0 xs
 \x -> x + 1
 ```
 
-Анонимные функции часто используются с функциями более высокого порядка. 
+Анонимные функции часто используются с функциями высшего порядка. 
 
 ```haskell
 Prelude> map (\x -> x + 1) [1..4]
@@ -875,23 +863,6 @@ randIter.next() // Each execution gives a random value, expression is evaluated 
 <!-- 
 ## Lambda Calculus
 A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
--->
-
-
-<!--
-
-Добавить:
-
-Мощность множества
-
-Cardinality (set)
-
-Количество элементов конечного множества. 
-
-https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%89%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0
-
-Применительно к типам - см. Isomorphisms and Cardinalities в Thinking with Types: Type-Level Programming in Haskell by Sandy Maguire https://thinkingwithtypes.com/ 
-
 -->
 
 # Ссылки
