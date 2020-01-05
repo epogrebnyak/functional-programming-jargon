@@ -116,6 +116,8 @@ desort = reverse . sort
 
 *Point-free style*
 
+[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Pointfree)
+
 Способ описать функцию без обозначения ее аргументов в явном виде. 
 
 Сравните:
@@ -135,9 +137,7 @@ sum' xs = foldr (+) 0 xs
 меньше ошибок. Однако запись более сложных функций в point-free стиле
 может затруднять понимание логики вычислений.
 
-Point-free стиль также называется *бесточечный стиль*.
-
-[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Pointfree)
+Point-free стиль также иногда называется *бесточечный стиль*.
 
 ### Лямбда-функция
 
@@ -183,6 +183,10 @@ __Ccылки (англ.яз.)__
 
 1. [Raul Rojas. A Tutorial Introduction to the Lambda Calculus][rr]
 2. [Ben Lynn. Lambda Calculus](https://crypto.stanford.edu/~blynn/lambda)
+
+<!-- 
+https://ncatlab.org/nlab/show/lambda-abstraction
+-->
 
 [rr]: https://www.inf.fu-berlin.de/lehre/WS03/alpi/lambda.pdf
 
@@ -282,6 +286,9 @@ sum :: Num a => a -> a -> a
 
 *Currying*
 
+[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Currying)
+
+
 Преобразование функции, которая принимает несколько аргументов, в функцию,
 которая принимает один аргумент и возвращает функцию, которая далее применяентся 
 к последующим аргументам.
@@ -299,12 +306,11 @@ Prelude> curriedSum 40 2
 42
 ```
 
-[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Currying)
-
-
 ### Частичное применение
 
 *Partial Application*
+
+[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Partial_application)
 
 Вызов функции с меньшим количеством аргументов, чем необходимо для ее завершения. В этом случае создается новая функция, которая будет обрабатывать оставшиеся аргументы. 
 
@@ -327,7 +333,6 @@ Prelude> 9
 
 __Ссылки__
 
-- [![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Partial_application)
 - [What is the difference between currying and partial application?](https://stackoverflow.com/questions/218025/what-is-the-difference-between-currying-and-partial-application)
 
 
@@ -374,12 +379,16 @@ Prelude> filter predThree [1..10]
 
 *Closure*
 
+[![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-clo]
+
+[w-clo]: https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
+
 Использование доступных для функции переменных, помимо непосредственно переданных ей аргументов.
 
 В других языках программирования замыкания играют важную роль, например,
 в функциях-конструктуорах, которые используют собственные параметры для создания других функций.
 
-Поскольку Haskell основан на лямбда-исчислении замыкания используются в нем естественным образом и [не являются чем-то особенным](https://stackoverflow.com/questions/9088295/closures-in-haskell).
+Поскольку Haskell основан на лямбда-исчислении, замыкания используются в нем естественным образом и [не являются чем-то особенным](https://stackoverflow.com/questions/9088295/closures-in-haskell).
 
 Вымученный пример замыкания на Haskell:
 
@@ -393,11 +402,6 @@ f x y = x + y
 ```
 
 *Примечание:* функция-[комбинатор](https://wiki.haskell.org/Combinator), в отличие от замыкания, использует только переданные ей аргументы.
-
-
-[![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-clo]
-
-[w-clo]: https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
 
 
 ## Аннотация типа
@@ -805,17 +809,17 @@ Other implementations:
 
 ## Cсылочная прозрачность (referential transparency)
 
+[![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-rt]
+
+[w-rt]: https://ru.wikipedia.org/wiki/%D0%A1%D1%81%D1%8B%D0%BB%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B7%D1%80%D0%B0%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C
+
 Выражение, которое можно заменить на его значение без изменения поведения программы, обладает свойством ссылочной прозрачности.
 
 Cсылочная прозрачность упрощает понимание и изменение кода программ.
 
 __Ссылки__: 
 
-- [![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-rt]
 - [Referential Transparency - UseNet](http://www.cas.mcmaster.ca/~kahl/reftrans.html)
-
-
-[w-rt]: https://ru.wikipedia.org/wiki/%D0%A1%D1%81%D1%8B%D0%BB%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B7%D1%80%D0%B0%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C
 
 
 ## Эквациональное рассуждение (equational reasoning)
