@@ -267,7 +267,7 @@ Prelude> curriedSum 40 2
 42
 ```
 
-Ссылки:
+__Ссылки__
 
 - [Currying](https://wiki.haskell.org/Currying)
 - [What is the difference between currying and partial application?](https://stackoverflow.com/questions/218025/what-is-the-difference-between-currying-and-partial-application)
@@ -296,7 +296,7 @@ Prelude> 9
 
 *Предупреждение.* Частичное применение не следует путать с частичной функцией - это похожие названия, означающие разные вещи.
 
-Ссылки:
+__Ссылки__
 
 - [Partial application](https://wiki.haskell.org/Partial_application)
 
@@ -424,8 +424,8 @@ data Point = Point Float Float
 
 [источник](http://book.realworldhaskell.org/read/types-and-functions.html)
 
+__Ссылки__
 
-Ссылки:
 - https://stackoverflow.com/questions/51509949/what-do-haskell-data-constructors-construct
 - [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
 
@@ -838,6 +838,7 @@ __Ссылки__
 Примеры выражений: `2+3`, `fst (1+2, 3+4)`, `fmap (+1) (Just 5)`.
 
 __Ссылки__: 
+
 https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)
 
 ## Значение
