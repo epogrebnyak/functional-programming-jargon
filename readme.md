@@ -140,7 +140,7 @@ sum' xs = foldr (+) 0 xs
 
 Point-free стиль на русском также называется *бесточечный стиль*.
 
-[![][https://img.shields.io/badge/-wiki.hakell.org-darkorchid]](https://wiki.haskell.org/Pointfree)
+[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Pointfree)
 
 ### Лямбда-функция
 
@@ -267,7 +267,7 @@ Prelude> curriedSum 40 2
 42
 ```
 
-[![][https://img.shields.io/badge/-wiki.hakell.org-darkorchid]](https://wiki.haskell.org/Currying)
+[![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Currying)
 
 
 ### Частичное применение
@@ -295,7 +295,7 @@ Prelude> 9
 
 __Ссылки__
 
-- [![][https://img.shields.io/badge/-wiki.hakell.org-darkorchid]](https://wiki.haskell.org/Partial_application)
+- [![](https://img.shields.io/badge/-wiki.hakell.org-darkorchid)](https://wiki.haskell.org/Partial_application)
 - [What is the difference between currying and partial application?](https://stackoverflow.com/questions/218025/what-is-the-difference-between-currying-and-partial-application)
 
 
