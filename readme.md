@@ -1,16 +1,13 @@
-> This is a Russian translation of [Functional Programming Jargon][en] with some additional editing and examples in Haskell.
+> This is an abridged and modified Russian translation of [Functional Programming Jargon][en] with examples in Haskell.
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
-
-> Эта статья - перевод и переработка публикации [Functional Programming Jargon][en] c
-с примерами на Нaskell. Комментарии переводчика приведены [тут](translation.md). В оригинальной статье примеры на JavaScript, она переведена на русский [здесь](https://habr.com/ru/post/310172).
+> Эта статья - сокращенный перевод и переработка публикации [Functional Programming Jargon][en] с примерами на Нaskell. В оригинальной статье примеры на JavaScript, в исходном виде она переведена на русский [здесь](https://habr.com/ru/post/310172).
 
 # Словарь сленга функционального программирования
 
-У функционального программирования (ФП) есть много преимуществ, и как результат, его популярность растет. При этом у любой парадигмы программирования
-есть своя терминология и жаргон, и ФП - не исключение. С помощью этого словаря 
+У функционального программирования (ФП) есть много преимуществ, и как результат, его популярность растет. При этом у любой парадигмы программирования есть своя терминология и жаргон, и ФП - не исключение. С помощью этого словаря 
 мы надеемся упростить задачу изучения ФП. 
 
 __Содержание__
