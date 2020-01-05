@@ -349,7 +349,9 @@ Prelude> filter predThree [1..10]
 
 > Замыкание — это особый вид функции. Она определена в теле другой функции и создаётся каждый раз во время её выполнения. Синтаксически это выглядит как функция, находящаяся целиком в теле другой функции. При этом вложенная внутренняя функция содержит ссылки на локальные переменные внешней функции. Каждый раз при выполнении внешней функции происходит создание нового экземпляра внутренней функции, с новыми ссылками на переменные внешней функции. 
 
-[Источник](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5))
+Источник: [![](https://img.shields.io/badge/-%D0%B2%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F-blue)][w-clo]
+
+[w-clo]: https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
 
 В других языках программирования замыкания играют важную роль, например,
 в функциях-конструктуорах, которые используют собственные параметры для создания других функций.
@@ -426,8 +428,8 @@ data Point = Point Float Float
 
 __Ссылки__
 
-- https://stackoverflow.com/questions/51509949/what-do-haskell-data-constructors-construct
-- [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
+- [What do haskell data constructors construct?](https://stackoverflow.com/questions/51509949/what-do-haskell-data-constructors-construct)
+- [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425)
 
 
 ## Алгебраический тип данных
