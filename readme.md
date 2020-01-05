@@ -1,10 +1,10 @@
-> This is an abridged and modified Russian translation of [Functional Programming Jargon][en] with examples in Haskell.
+> This is an abridged and modified Russian translation of [Functional Programming Jargon][en] with examples in Haskell. Some code examples borrowed from [Turkish translation][tr].
 
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
-
-> Эта статья - сокращенный [перевод и переработка](translation.md) публикации [Functional Programming Jargon][en] с примерами на Нaskell. Перевод оригинальной статьи с примерами на JavaScript выполнен [здесь](https://habr.com/ru/post/310172).
+> Эта статья - сокращенный [перевод и переработка](translation.md) публикации [Functional Programming Jargon][en] с примерами на Нaskell, часть из которых взята из [турецкой
+версии статьи][tr]. Перевод оригинальной статьи с примерами на JavaScript выполнен [здесь](https://habr.com/ru/post/310172).
 
 # Словарь сленга функционального программирования
 
@@ -372,12 +372,10 @@ f x y = x + y
 
 *Type signatures*
 
-Подпись, или аннотация, типа - это строка, которая показывает тип какой-либо переменной. 
+Подпись, или аннотация, типа - это строка особого формата, которая показывает тип переменной. 
 
-В Haskell подпись типа может задаваться напрямую в коде.
-
-Например, после определения ```inc :: Int -> Int``` компилятор будет ожидать, что под именем `inc` будет функция, которая принимает значение типа `Int` и выдает результат
-также типа `Int`. 
+В Haskell подпись типа может задаваться напрямую в коде. Например, после определения ```inc :: Int -> Int``` компилятор будет ожидать, что под именем `inc` будет определена функция, которая принимает значение типа `Int` и выдает результат также типа `Int`. Если под именем 
+`inc` будет определна функция с другим поведенеим, компилятор выдаст ошибку.
 
 В отсутствие подписи типа компилятор сам выводит ее наиболее общий вид исходя из того, как переменная определена и используется в программе: 
 
@@ -848,6 +846,8 @@ https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D
 
 
 ## Ленивые вычисления
+
+*Lazy evaluation*
 
 Механизм откладывания вычислений до момента, когда результат вычислений 
 необходим для продолжения исполнения программы.
