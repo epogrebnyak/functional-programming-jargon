@@ -134,17 +134,13 @@ sum' xs = foldr (+) 0 xs
 ```
 
 Обе фукнции выполняют одно и то же действие суммирования, однако 
-запись в point-free стиле считается более лаконичной и может содержать 
-меньше ошибок. 
-
-Однако запись более сложных функций в point-free стиле
+запись в point-free стиле считается более лаконичной и будет содержать 
+меньше ошибок. Однако запись более сложных функций в point-free стиле
 может затруднять понимание логики вычислений.
 
 Point-free стиль на русском также называется *бесточечный стиль*.
 
-__Ссылки__
-
-- [Point-free](https://wiki.haskell.org/Pointfree)
+[![][https://img.shields.io/badge/-wiki.hakell.org-darkorchid]](https://wiki.haskell.org/Pointfree)
 
 ### Лямбда-функция
 
@@ -271,10 +267,7 @@ Prelude> curriedSum 40 2
 42
 ```
 
-__Ссылки__
-
-- [Currying](https://wiki.haskell.org/Currying)
-- [What is the difference between currying and partial application?](https://stackoverflow.com/questions/218025/what-is-the-difference-between-currying-and-partial-application)
+[![][https://img.shields.io/badge/-wiki.hakell.org-darkorchid]](https://wiki.haskell.org/Currying)
 
 
 ### Частичное применение
@@ -302,8 +295,8 @@ Prelude> 9
 
 __Ссылки__
 
-- [Partial application](https://wiki.haskell.org/Partial_application)
-
+- [![][https://img.shields.io/badge/-wiki.hakell.org-darkorchid]](https://wiki.haskell.org/Partial_application)
+- [What is the difference between currying and partial application?](https://stackoverflow.com/questions/218025/what-is-the-difference-between-currying-and-partial-application)
 
 
 ## Свойства и виды функций
