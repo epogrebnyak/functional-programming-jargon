@@ -3,7 +3,6 @@
 [en]: https://github.com/hemanth/functional-programming-jargon
 [tr]: https://github.com/mrtkp9993/functional-programming-jargon
 
-
 > Эта статья - перевод и переработка публикации [Functional Programming Jargon][en] c
 с примерами на Нaskell. Комментарии переводчика приведены [тут](translation.md). В оригинальной статье примеры на JavaScript, она переведена на русский [здесь](https://habr.com/ru/post/310172).
 
@@ -14,6 +13,52 @@
 мы надеемся упростить задачу изучения ФП. 
 
 __Содержание__
+* [1. Функции](#1-функции)
+  * [Определение функции](#определение-функции)
+  * [Операции с фукциями](#операции-с-фукциями)
+    * [Композиция функций](#композиция-функций)
+    * [Point-free стиль записи](#point-free-стиль-записи)
+    * [Лямбда-функция](#лямбда-функция)
+    * [Функция высшего порядка (ФВП)](#функция-высшего-порядка-фвп)
+  * [Не совсем "правильные" функции](#не-совсем-правильные-функции)
+    * [Частичная функция](#частичная-функция)
+    * [Чистота и побочные эффекты](#чистота-и-побочные-эффекты)
+      * [Чистота](#чистота)
+      * [Side effects](#side-effects)
+  * [Аргументы функции и их обработка](#аргументы-функции-и-их-обработка)
+    * [Арность функции](#арность-функции)
+    * [Каррирование](#каррирование)
+    * [Частичное применение](#частичное-применение)
+  * [Свойства и виды функций](#свойства-и-виды-функций)
+    * [Индемпотентность](#индемпотентность)
+    * [Предикат](#предикат)
+    * [Замыкание](#замыкание)
+  * [Аннотация типа](#аннотация-типа)
+* [2. Типы](#2-типы)
+  * [Тип (данных)](#тип-данных)
+  * [Алгебраический тип данных](#алгебраический-тип-данных)
+    * [Тип-сумма (sum type)](#тип-сумма-sum-type)
+    * [Тип-произведение (product type)](#тип-произведение-product-type)
+  * [Functor](#functor)
+  * [Pointed Functor](#pointed-functor)
+  * [Lifting](#lifting)
+  * [Monoid](#monoid)
+  * [Monad](#monad)
+  * [Comonad](#comonad)
+  * [Applicative Functor](#applicative-functor)
+  * [Setoid](#setoid)
+  * [Semigroup](#semigroup)
+  * [Foldable](#foldable)
+  * [Lens](#lens)
+* [3. Общие понятия](#3-общие-понятия)
+  * [Cсылочная прозрачность (referential transparency)](#cсылочная-прозрачность-referential-transparency)
+  * [Эквациональное рассуждение (equational reasoning)](#эквациональное-рассуждение-equational-reasoning)
+  * [Выражение](#выражение)
+  * [Значение](#значение)
+  * [Ленивые вычисления](#ленивые-вычисления)
+* [Ссылки](#ссылки)
+  * [Другие англоязычные словари и глоссарии](#другие-англоязычные-словари-и-глоссарии)
+  * [Книги и сайты на русском языке](#книги-и-сайты-на-русском-языке)
 
 # 1. Функции
 
@@ -40,7 +85,7 @@ __Содержание__
 
 *Примечание:* в программировании функцией может называться и та последовательность операций, которая приводит к побочным эффектам (записи на диск, проведению ввода-вывода, изменению глобальных переменных). Чтобы отличить их от функций в данном определении, такие операции можно называть процедурами. 
 
-## Делаем с функциями, что хотим 
+## Операции с фукциями 
 
 ### Композиция функций
 
@@ -356,135 +401,7 @@ inc :: Num a => a -> a
 В других языках программирования аннотации типов могут 
 иметь справочную функцию, и не проверяться компилятором. 
 
-# 2. Общие понятия
-
-## Referential Transparency
-
-An expression that can be replaced with its value without changing the
-behavior of the program is said to be referentially transparent.
-
-Say we have function greet:
-
-```js
-const greet = () => 'Hello World!'
-```
-
-Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
-referentially transparent.
-
-##  Equational Reasoning
-
-When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
-
-
-## Continuation
-
-At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
-
-```js
-const printAsString = (num) => console.log(`Given ${num}`)
-
-const addOneAndContinue = (num, cc) => {
-  const result = num + 1
-  cc(result)
-}
-
-addOneAndContinue(2, printAsString) // 'Given 3'
-```
-
-Continuations are often seen in asynchronous programming when the program needs to wait to receive data before it can continue. The response is often passed off to the rest of the program, which is the continuation, once it's been received.
-
-```js
-const continueProgramWith = (data) => {
-  // Continues program with data
-}
-
-readFileAsync('path/to/file', (err, response) => {
-  if (err) {
-    // handle error
-    return
-  }
-  continueProgramWith(response)
-})
-```
-
-## Category
-
-A category in category theory is a collection of objects and morphisms between them. In programming, typically types
-act as the objects and functions as morphisms.
-
-To be a valid category 3 rules must be met:
-
-1. There must be an identity morphism that maps an object to itself.
-    Where `a` is an object in some category,
-    there must be a function from `a -> a`.
-2. Morphisms must compose.
-    Where `a`, `b`, and `c` are objects in some category,
-    and `f` is a morphism from `a -> b`, and `g` is a morphism from `b -> c`;
-    `g(f(x))` must be equivalent to `(g • f)(x)`.
-3. Composition must be associative
-    `f • (g • h)` is the same as `(f • g) • h`
-
-Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
-
-__Ссылки__
-
-* [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
-
-## Value
-
-<!-- Term -->
-
-Anything that can be assigned to a variable.
-
-```js
-5
-Object.freeze({name: 'John', age: 30}) // The `freeze` function enforces immutability.
-;(a) => a
-;[1]
-undefined
-```
-
-## Constant
-
-A variable that cannot be reassigned once defined.
-
-```js
-const five = 5
-const john = Object.freeze({name: 'John', age: 30})
-```
-
-Constants are [referentially transparent](#referential-transparency). That is, they can be replaced with the values that they represent without affecting the result.
-
-With the above two constants the following expression will always return `true`.
-
-```js
-john.age + five === ({name: 'John', age: 30}).age + (5)
-```
-
-## Lazy evaluation
-
-Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
-
-```js
-const rand = function*() {
-  while (1 < 2) {
-    yield Math.random()
-  }
-}
-```
-
-```js
-const randIter = rand()
-randIter.next() // Each execution gives a random value, expression is evaluated on need.
-```
-
-<!-- 
-## Lambda Calculus
-A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
--->
-
-# 3. Типы
+# 2. Типы
 
 ## Тип (данных)
 
@@ -573,7 +490,7 @@ __Дополнения__:
 - [Теория множеств](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2).
 - [Бывают ли алгебраические типы данных вне типа-суммы и произведения?](https://stackoverflow.com/questions/59509294/are-there-algebraic-data-types-outside-of-sum-and-product)
 
-
+<!--
 ## Functor
 
 An object that implements a `map` function which, while running over each value in the object to produce a new object, adheres to two rules:
@@ -861,11 +778,111 @@ Other implementations:
 * [partial.lenses](https://github.com/calmm-js/partial.lenses) - Tasty syntax sugar and a lot of powerful features
 * [nanoscope](http://www.kovach.me/nanoscope/) - Fluent-interface
 
+-->
+
+# 3. Общие понятия
+
+## Cсылочная прозрачность (referential transparency)
+
+Выражение, которое можно заменить на его значение без изменения поведения программы, обладает свойством ссылочной прозрачности.
+
+Cсылочная прозрачность упрощает понимание и изменение кода программ.
+
+__Подробнее__: 
+
+- [Cсылочная прозрачность - Википедия](https://ru.wikipedia.org/wiki/%D0%A1%D1%81%D1%8B%D0%BB%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B7%D1%80%D0%B0%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C)
+- [Referential Transparency - UseNet](http://www.cas.mcmaster.ca/~kahl/reftrans.html)
+
+## Эквациональное рассуждение (equational reasoning)
+
+В случае, если программа состоит из выражений и в ней отсуствуют побочные эффекты,
+истина о состоянии системы может быть определена из составных частей программы.
+
+Упорощенно, эквациональное рассуждение это процесс интерпретации или доказательства 
+свойств кода программы путем подстановки равных выражений.
+
+__Подробнее__: 
+[Haskell for all - Equational reasoning](http://www.haskellforall.com/2013/12/equational-reasoning.html)
+
+*Примечание:* перевод термина дан по [справочнику ruhaskell](https://github.com/ruHaskell/ruhaskell/wiki/Translation), часто используется в английском написании без перевода.
+
+<!--
+## Category
+
+A category in category theory is a collection of objects and morphisms between them. In programming, typically types
+act as the objects and functions as morphisms.
+
+To be a valid category 3 rules must be met:
+
+1. There must be an identity morphism that maps an object to itself.
+    Where `a` is an object in some category,
+    there must be a function from `a -> a`.
+2. Morphisms must compose.
+    Where `a`, `b`, and `c` are objects in some category,
+    and `f` is a morphism from `a -> b`, and `g` is a morphism from `b -> c`;
+    `g(f(x))` must be equivalent to `(g • f)(x)`.
+3. Composition must be associative
+    `f • (g • h)` is the same as `(f • g) • h`
+
+Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
+
+__Ссылки__
+
+* [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+
+-->
+
+## Выражение
+
+*Expression*
+
+Допустимый синтаксисом языка программирования набор переменных, операторов и функций,
+возвращающий значение.
+
+Примеры выражений: `2+3`, `fst (1+2, 3+4)`, `fmap (+1) (Just 5)`.
+
+__Подробнее__: 
+https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)
+
+## Значение
+
+*Value*
+
+1) Результат вычисления выражения. 
+
+2) Все, что можно присвоить переменной.
+
+
+## Ленивые вычисления
+
+Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. 
+
+In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
+
+```js
+const rand = function*() {
+  while (1 < 2) {
+    yield Math.random()
+  }
+}
+```
+
+```js
+const randIter = rand()
+randIter.next() // Each execution gives a random value, expression is evaluated on need.
+```
+
+<!-- 
+## Lambda Calculus
+A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
+-->
+
+
 <!--
 
-# Добавить
+Добавить:
 
-## Мощность множества
+Мощность множества
 
 Cardinality (set)
 
@@ -877,16 +894,20 @@ https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%89%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%
 
 -->
 
-# Ссылки <!-- omit in TOC -->
+# Ссылки
+
+## Другие англоязычные словари и глоссарии
 
 - <http://degoes.net/articles/fp-glossary>
-- <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
+- <https://blog.lelonek.me/functional-programming-dictionary-with-ruby-38e39b3ddcba>
+- <https://wiki.haskell.org/Category:Glossary>
+
+## Книги и сайты на русском языке
 - <https://anton-k.github.io/ru-haskell-book/book/home.html>
 - <https://www.ibm.com/developerworks/ru/library/l-haskell2/index.html>
-- ohaskell
-- ruhaskell.org
-
-[hg]: https://wiki.haskell.org/Category:Glossary
+- <http://fprog.ru/2009/issue3/eugene-kirpichov-elements-of-functional-languages/>
+- <https://www.ohaskell.guide>
+- <https://ruhaskell.org>
 
 
 __Развитие словаря__
