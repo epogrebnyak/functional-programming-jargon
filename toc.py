@@ -335,5 +335,4 @@ def cli():
 if __name__ == "__main__":
     txt = pathlib.Path("readme.md").read_text(encoding='utf-8')
     print(toc(txt))
-    modify_and_write("readme.md")
 
