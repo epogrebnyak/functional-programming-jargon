@@ -847,24 +847,21 @@ https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D
 2) Все, что можно присвоить переменной.
 
 
-## Ленивые вычисления*
+## Ленивые вычисления
 
-Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. 
+Механизм откладывания вычислений до момента, когда результат вычислений 
+необходим для продолжения исполнения программы.
 
-In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
+В функциональных языках ленивые вычисления позволяют, например, использовать такие 
+структуры данных как бесконечные списки:
 
-```js
-const rand = function*() {
-  while (1 < 2) {
-    yield Math.random()
-  }
-}
+
+```haskell
+Prelude> let lst0 = [1..]
+Prelude> take 5 lst0
+[1,2,3,4,5]
 ```
 
-```js
-const randIter = rand()
-randIter.next() // Each execution gives a random value, expression is evaluated on need.
-```
 
 # Ссылки
 
