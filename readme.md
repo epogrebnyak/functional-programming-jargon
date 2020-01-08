@@ -139,6 +139,20 @@ sum' xs = foldr (+) 0 xs
 
 Point-free стиль также иногда называется *бесточечный стиль*.
 
+
+> In Haskell you can simplify function definitions by η-reducing them. For example, instead of writing:
+
+```
+f x = (some expresion) x
+```
+
+> you can simply write
+
+```
+f = (some expression)
+```
+[<источник>](https://her.esy.fun/posts/0010-Haskell-Now/)
+
 ### Лямбда-функция
 
 *Lambda*
