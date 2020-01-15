@@ -936,6 +936,12 @@ Prelude> take 5 xs
 - <https://www.ohaskell.guide>
 - <https://ruhaskell.org>
 
+## Выступления
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I&#39;ve been asked about the famous talk of Rich Hickey &quot;Simple made Easy&quot; (aka &quot;Simplicity Matters&quot;).<br><br>Absolutely a must-watch for every developer who wants to call himself a qualified senior or architect.<a href="https://t.co/ouFIdjCOxC">https://t.co/ouFIdjCOxC</a> <a href="https://t.co/HFAZkoXx0s">https://t.co/HFAZkoXx0s</a></p>&mdash; Alexander Granin (@graninas) <a href="https://twitter.com/graninas/status/1217328045729730561?ref_src=twsrc%5Etfw">January 15, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+([infoq transcript](https://www.infoq.com/presentations/Simple-Made-Easy/))
+
 
 # Развитие словаря
 
